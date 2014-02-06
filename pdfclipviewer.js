@@ -8,16 +8,49 @@
     This is done by modifying the height and width of the canvas element that pdf.js renders to. It 
     then uses canvas.translate to move to the correct section of the page.
 
-    This is almost 100% the code from https://github.com/mozilla/pdf.js/tree/master/examples/helloworld 
-    with a couple of changes of my own.
+    This is contains much code from https://github.com/mozilla/pdf.js/tree/master/examples/helloworld 
+    within the function renderPdfClip.
 */
 
+function loadJsonTextbook(container, source) {
+    // Loads JSON textbook, calls inline function on success
+    $.getJSON( source, function(textbook) {
+        var title = document.createElement('h1');
+        title.textContent = textbook.title;
+        container.appendChild(title);
 
-function renderPdfSource(container_id, pdf_url, start_page, start_y, end_page, end_y) {
-    var container = document.getElementById(container_id);
+        var author = document.createElement('span');
+        author.textContent = textbook.author;
+        author.className += "author";
+        container.appendChild(author);
+
+        $.each(textbook.elements, function( index, element ) {
+            //Create element container
+            var element_container = document.createElement('div');
+            element_container.id = container.id+'_'+index;
+            container.appendChild(element_container);
+            //Render if we know how
+            switch (element.type) {
+                case 'pdf': 
+                    renderPdfElement(element_container, element.source, element.start, element.end);
+                    break;
+                default:
+                    break;
+            }
+        });
+    });
+}
+function renderPdfElement(container, pdf_url, start, end) {
+    //Unpack start and end variables
+    var start_page = Math.floor(start);
+    var start_y = start-start_page;
+    var end_page = Math.floor(end);
+    var end_y = end-end_page;
+    alert('start: '+start+', end: '+end+', '+start_page+'.'+start_y+', '+end_page+'.'+end_y);
+    //Loop through, creating a new canvas for each page
     for (var i = start_page; i <= end_page; i++) {
-        var canvas = document.createElement("canvas");
-        canvas.id = container_id+"page_"+i;
+        var canvas = document.createElement('canvas');
+        canvas.id = container.id+'_page_'+i;
         container.appendChild(canvas);
         switch(i) {
             case start_page:

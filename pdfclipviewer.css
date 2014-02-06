@@ -1,0 +1,12 @@
+body {
+	text-align: center;
+}
+.pdfSource {
+    border: 1px solid #d4d4d4; 
+    background-color: #fff;
+    margin: 2em;
+}
+.pdfSource canvas {
+	display: block;
+	float: center;
+}

@@ -1,0 +1,24 @@
+{
+  "author": "Daniel Jones",
+  "title": "MY ABSOLUTE FAVES",
+  "elements": [
+      {
+          "type": "pdf",
+          "source": "https://bitcoin.org/bitcoin.pdf",
+          "start": 2.2,
+          "end": 4.4
+      }, 
+      {
+          "type": "pdf",
+          "source": "http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf",
+          "start": 1.2,
+          "end": 2.7
+      }, 
+      {
+          "type": "pdf",
+          "source": "http://www.cl.cam.ac.uk/teaching/1314/CompDesign/cam-only/ComputerDesignHandouts2013.pdf",
+          "start": 5.8,
+          "end": 10.2
+      }
+  ]
+}
