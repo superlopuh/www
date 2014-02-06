@@ -1,0 +1,58 @@
+<html>
+<head>
+	<title>
+		Group Lima: Technical Textbook of the future
+	</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="pdf.js" type="text/javascript"></script>
+	<script src="compatibility.js" type="text/javascript"></script>
+	<script src="pdfclipviewer.js" type="text/javascript"></script>
+	<style>
+		body {
+			text-align: center;
+		}
+		.pdfSource {
+		    border: 1px solid #d4d4d4; 
+		    background-color: #fff;
+		    margin: 2em;
+		}
+		.pdfSource canvas {
+			display: block;
+				float: center;
+		}
+	</style>
+</head>
+<body>
+	<button type="button" class="loadPdf" 
+			data-container="pdfSource1" data-url="https://bitcoin.org/bitcoin.pdf" 
+			data-startpage="2" data-starty="0.2" 
+			data-endpage="4" data-endy="0.4" >
+		Load the Bitcoin PDF please!
+	</button>
+	<button type="button" class="loadPdf" 
+			data-container="pdfSource2" data-url="http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf" 
+			data-startpage="1" data-starty="0.2" 
+			data-endpage="2" data-endy="0.7" >
+		Load the Alg II PDF please!
+	</button>
+	<button type="button" class="loadPdf" 
+			data-container="pdfSource3" data-url="http://www.cl.cam.ac.uk/teaching/1314/CompDesign/cam-only/ComputerDesignHandouts2013.pdf" 
+			data-startpage="5" data-starty="0.8" 
+			data-endpage="10" data-endy="0.2" >
+		Load the Computer Design PDF please!
+	</button>
+   	<div id="pdfSource1" class="pdfSource"></div>
+   	<div id="pdfSource2" class="pdfSource"></div>
+   	<div id="pdfSource3" class="pdfSource"></div>
+   	<script>
+   		$( ".loadPdf" ).click(function() {
+   			alert($(this).data('container'));
+   			renderPdfSource(
+   				$(this).data('container'), $(this).data('url'), 
+   				$(this).data('startpage'), $(this).data('starty'), 
+   				$(this).data('endpage'), $(this).data('endy')
+   				);
+		});
+	</script>
+</body>
+</html>
