@@ -46,7 +46,6 @@ function renderPdfElement(container, pdf_url, start, end) {
     var start_y = start-start_page;
     var end_page = Math.floor(end);
     var end_y = end-end_page;
-    alert('start: '+start+', end: '+end+', '+start_page+'.'+start_y+', '+end_page+'.'+end_y);
     //Loop through, creating a new canvas for each page
     for (var i = start_page; i <= end_page; i++) {
         var canvas = document.createElement('canvas');
