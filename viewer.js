@@ -24,6 +24,8 @@ function loadJsonTextbook(container, source) {
 
 /*Note the 'container' variable refers to an actual DOM element, not its ID*/
 function renderTextbook(container, textbook) {
+    container.className += " textbook_container";
+    
     var title = document.createElement('h1');
     title.textContent = textbook.title;
     container.appendChild(title);
