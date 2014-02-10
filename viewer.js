@@ -8,6 +8,10 @@
 
     This is contains much code from https://github.com/mozilla/pdf.js/tree/master/examples/helloworld 
     within the function renderPdfClip.
+
+    Requirements
+    ------------
+    This file requires the jQuery library and pdf.js to be included in the page to function correctly.
 */
 
 /*Note: the 'container' variable refers to an actual DOM element, not its ID*/
