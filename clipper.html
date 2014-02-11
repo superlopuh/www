@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<title>
+		Group Lima: Technical Textbook of the future
+	</title>
+	<link rel="stylesheet" href="clipper.css" />
+	<meta charset="utf-8" />
+</head>
+<body>
+	<div id="clipper-wrapper">
+
+	  <div id="clipper-viewer">
+
+	    <div id="viewer-canvas-container">
+	      <div id="viewer-overlay"></div>
+	      <canvas id="clipper-viewer-canvas" data-page="1"></canvas>
+	    </div>
+
+	    <div id="clipper-viewer-controls">
+	      <a class="button left" id="previous-page">&laquo; Previous page</a>
+	      <a class="button right" id="next-page">Next page &raquo;</a>
+	    </div>
+	  </div>
+
+	  <div id="clipper-controls">
+	    <div id="loader">
+	      <input type="text" id="source-url" placeholder="PDF source..." />
+	      <a class="button right" id="source-load">Load PDF</a>
+	      <div class="clearfix"></div>
+	    </div>
+
+	    <div id="source-list">
+	      <ul>
+	      </ul>
+	    </div>
+
+	    <a class="button right" id="save">Save textbook</a>
+	  </div>
+	</div>
+
+	<script src="jquery.js"></script>
+	<script src="pdf.js" type="text/javascript"></script>
+	<script src="compatibility.js" type="text/javascript"></script>
+	<script src="viewer.js" type="text/javascript"></script>
+	<script src="clipper.js" type="text/javascript"></script>
+</body>
+</html>

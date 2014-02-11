@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.clearfix {
+  clear: both;
+}
+
+body, html {
+  height: 100%;
+  background-color: grey;
+  font-family: sans-serif;
+}
+
+a.button {
+  display: inline-block;
+  padding: 0.5em;
+  margin: 1em 0;
+  cursor: pointer;
+  background-color: blue;
+  color: white;
+  box-shadow: 2px 2px rgba(0,0,0,0.5);
+  border-radius: 5px;
+}
+
+a.button:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
+  box-shadow: none;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+input[type=text] {
+  padding: 0.5em;
+  width: 100%;
+}
+
+#clipper-wrapper {
+}
+
+#clipper-viewer {
+  height: 100%;
+  width: 70%;
+  float: left;
+}
+
+#clipper-controls {
+  position: fixed;
+  right: 0;
+  height: 100%;
+  width: 30%;
+  padding: 30px;
+  background-color: white;
+}
+
+#clipper-controls ul {
+  margin: 1em 0;
+  list-style-type: none;
+}
+
+input[type=radio], label {
+  cursor: pointer;
+}
+
+input[type=text] {
+  outline: 1px solid black;
+}
+
+#viewer-canvas-container {
+  height: 90%;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#clipper-viewer-canvas {
+  background-color: white;
+  border: 1px solid black;
+  width: 100%;
+  left: 7%;
+  margin-top: 5%;
+}
+
