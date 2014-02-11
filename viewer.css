@@ -8,8 +8,7 @@ body {
   background-color: #fff;
   margin: 2em;
 }
-
-.pdfSource canvas {
-  display: block;
-  float: center;
+.textbook_container canvas {
+	width: 90%;
+	background-color: #ffffff;
 }
