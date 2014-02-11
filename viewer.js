@@ -45,10 +45,17 @@ function renderTextbook(container, textbook) {
             case 'pdf': 
                 renderPdfElement(element_container, element.source, element.start, element.end);
                 break;
+            case 'youtube':
+                renderYoutubeElement(element_container, element.source);
             default:
                 break;
         }
     });
+}
+
+function renderYoutubeElement(container, yt_id) {
+      var tag = "<iframe class='yt_player' type='text/html' width='100%' src='http://www.youtube.com/embed/"+yt_id+"&html5=True' frameborder='0'></iframe>";
+      container.innerHTML = tag;
 }
 
 function renderPdfElement(container, pdf_url, start, end) {
