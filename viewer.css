@@ -1,18 +1,18 @@
 body {
-  text-align: center;
-  background-color: #94ADFF;
+    text-align: center;
+    background-color: #eaeaea;
 }
 
 .textbook_container {
-  border: 1px solid #d4d4d4; 
-  background-color: #fff;
-  margin: 2em;
-  font-family: georgia, serif;
+    border: 1px solid #d4d4d4; 
+    background-color: #fff;
+    margin: 2em;
+    font-family: georgia, serif;
 }
-.textbook_container span.author{
-  margin-bottom: 2em;
+.textbook_container header {
+    margin: 4em 0 4em 0;
 }
 .textbook_container canvas {
-	width: 90%;
-	background-color: #ffffff;
+    width: 90%;
+    background-color: #ffffff;
 }

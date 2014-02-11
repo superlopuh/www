@@ -26,14 +26,17 @@ function loadJsonTextbook(container, source) {
 function renderTextbook(container, textbook) {
     container.className += " textbook_container";
     
+    var header = document.createElement('header');
+    container.appendChild(header);
+
     var title = document.createElement('h1');
     title.textContent = textbook.title;
-    container.appendChild(title);
+    header.appendChild(title);
 
     var author = document.createElement('span');
     author.textContent = 'By '+textbook.author;
     author.className += "author";
-    container.appendChild(author);
+    header.appendChild(author);
 
     $.each(textbook.elements, function( index, element ) {
         //Create element container
@@ -47,6 +50,7 @@ function renderTextbook(container, textbook) {
                 break;
             case 'youtube':
                 renderYoutubeElement(element_container, element.source);
+                break;
             default:
                 break;
         }
