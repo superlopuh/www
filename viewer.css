@@ -1,13 +1,15 @@
 body {
-	text-align: center;
-	background-color: #94ADFF;
+  text-align: center;
+  background-color: #94ADFF;
 }
+
 .textbook_container {
-    border: 1px solid #d4d4d4; 
-    background-color: #fff;
-    margin: 2em;
+  border: 1px solid #d4d4d4; 
+  background-color: #fff;
+  margin: 2em;
 }
+
 .pdfSource canvas {
-	display: block;
-	float: center;
+  display: block;
+  float: center;
 }
