@@ -21,8 +21,10 @@
 	<script src="viewer.js" type="text/javascript"></script>
    	<script>
    		$(window).load(function() {
-        	var container = document.getElementById('textbook');
-   			loadJsonTextbook(container, 'sample_textbook.lima');
+   			brackets.fs.showOpenDialog (false, false, "bla", "", null, function(err,fp) {
+        		var container = document.getElementById('textbook');
+   				loadJsonTextbook(container, fp); //'sample_textbook.lima'
+   			});
 		});
 	</script>
 </body>
