@@ -9,6 +9,7 @@
 </head>
 <body>
 	<a href='index.html'>Index</a>
+  <a href='make.html'>Make textbook</a>
 	<a href='viewer_demo.html'>viewer demo</a>
 	<a href='viewer.html'>Open</a>
 	<a href='clipper.html'>Clipper</a>
@@ -25,7 +26,7 @@
    		$(window).load(function() {
    			openJsonTextbook();
 		});
-   		
+
    		function openJsonTextbook() {
     		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
             		loadJsonTextbook(document.getElementById('textbook'), fp);
