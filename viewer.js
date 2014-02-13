@@ -49,7 +49,7 @@ function renderTextbook(container, textbook) {
                 renderPdfElement(element_container, element.source, element.start, element.end);
                 break;
             case 'youtube':
-                renderYoutubeElement(element_container, element.source);
+                renderYoutubeElement(element_container, element);
                 break;
             default:
                 break;
@@ -57,9 +57,9 @@ function renderTextbook(container, textbook) {
     });
 }
 
-function renderYoutubeElement(container, yt_id) {
-      var tag = "<iframe class='yt_player' type='text/html' width='100%' src='http://www.youtube.com/embed/"+yt_id+"&html5=True' frameborder='0'></iframe>";
-      container.innerHTML = tag;
+function renderYoutubeElement(container, element) {
+    var tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
+    container.innerHTML = tag;
 }
 
 function renderPdfElement(container, pdf_url, start, end) {

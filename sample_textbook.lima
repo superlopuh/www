@@ -9,6 +9,12 @@
           "end": 4.4
       }, 
       {
+          "type": "youtube",
+          "source": "B7hVxCmfPtM",
+          "start": 30, 
+          "end": 100
+      },
+      {
           "type": "pdf",
           "source": "http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf",
           "start": 1.2,
