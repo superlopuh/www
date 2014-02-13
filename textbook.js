@@ -1,3 +1,7 @@
+
+// The textbook is stored in brackets.currentTextbook
+
+
 function newTextbook() {
 	var newTextbook 		= {};
 	newTextbook.title 		= "Title";
@@ -6,7 +10,7 @@ function newTextbook() {
 	return newTextbook;
 }
 
-function addPDFRectangleClip(textbook,source,startX,startY,endX,endY) {
+function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	var newElement 		= {};
 	newElement.type 	= "pdf";
 	newElement.source 	= source;
@@ -14,7 +18,7 @@ function addPDFRectangleClip(textbook,source,startX,startY,endX,endY) {
 	newElement.startY 	= startY;
 	newElement.endX 	= endX;
 	newElement.endY 	= endY;
-	textbook.elements[] = newElement;
+	brackets.currentTextbook.elements[] = newElement;
 	// return textbook;
 }
 
@@ -28,10 +32,5 @@ function addWiki(textbook,source) {}
 
 function deleteElement(textbook, clipNumber) {}
 
+// Move element at index oldPosition in between element at index NewPosition and the element at index (newPosition+1)
 function moveElement(textbook,oldPosition,newPosition) {}
-
-function saveTextbook() {
-    brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
-    	brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
-    });
-}
