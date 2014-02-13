@@ -113,7 +113,7 @@ function deleteComment(elementNumber,commentNumber) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (elementNumber >= 0 && elementNumber<numberOfElements) {
 		var numberOfComments = brackets.currentTextbook.elements[elementNumber].comments.length;
-		if (commentNumber >= 0 && commentNumber<numberOfComments) {       // array.append() vs array[]
+		if (commentNumber >= 0 && commentNumber<numberOfComments) {
 			var newComments = [];
 			for (var comm = 0; comm < commentNumber; el++) {
 				newElements.add(brackets.currentTextbook.elements[elementNumber].comments[comm]);
@@ -121,8 +121,7 @@ function deleteComment(elementNumber,commentNumber) {
 			for (var comm = commentNumber+1; comm < numberOfElements; el++) {
 				newElements.add(brackets.currentTextbook.elements[elementNumber].comments[comm]);
 			}
-			brackets.currentTextbook.elements[elementNumber].comments[commentNumber];
+			brackets.currentTextbook.elements[elementNumber].comments = newComments;
 		}
 	}
-	
 }
