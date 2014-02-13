@@ -18,6 +18,7 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	newElement.startY 	= startY;
 	newElement.endX 	= endX;
 	newElement.endY 	= endY;
+	newElement.comments = [];
 	brackets.currentTextbook.elements[] = newElement;
 }
 
@@ -28,6 +29,7 @@ function addYouTubeVid(source,startTime) {
 	newElement.type 	= "youtube";
 	newElement.source 	= source;
 	newElement.startTime 	= startTime;
+	newElement.comments = [];
 	brackets.currentTextbook.elements[] = newElement;
 }
 
@@ -35,6 +37,7 @@ function addText(text) {
 	var newElement 		= {};
 	newElement.type 	= "text";
 	newElement.text 	= text;
+	newElement.comments = [];
 	brackets.currentTextbook.elements[] = newElement;
 }
 
@@ -42,6 +45,7 @@ function addWiki(source) {
 	var newElement 		= {};
 	newElement.type 	= "wiki";
 	newElement.source 	= source;
+	newElement.comments = [];
 	brackets.currentTextbook.elements[] = newElement;
 }
 
@@ -50,10 +54,10 @@ function deleteElement(clipNumber) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (clipNumber >= 0 && clipNumber<numberOfElements) {
 		var newElements = [];
-		for (var el = 0; el < n; el++) {
+		for (var el = 0; el < clipNumber; el++) {
 			newElements[] = brackets.currentTextbook.elements[el]
 		}
-		for (var el = n+1; el < numberOfElements; el++) {
+		for (var el = clipNumber+1; el < numberOfElements; el++) {
 			newElements[] = brackets.currentTextbook.elements[el]
 		}
 		brackets.currentTextbook.elements = newElements;
@@ -96,4 +100,29 @@ function moveElement(oldPosition,newPosition) {
 			brackets.currentTextbook.elements = newElements;
 		}
 	};
+}
+
+function addComment(elementNumber,comment,author) {
+	brackets.currentTextbook.elements.comments[] = {
+		"author"  = author,
+		"comment" = comment
+	};
+}
+
+function deleteComment(elementNumber,commentNumber) {
+	var numberOfElements = brackets.currentTextbook.elements.length;
+	if (elementNumber >= 0 && elementNumber<numberOfElements) {
+		var numberOfComments = brackets.currentTextbook.elements[elementNumber].comments.length;
+		if (brackets.currentTextbook.elements[elementNumber]comments.length > commentNumber) {       // Fix this also fix array.append() vs array[]
+			var newComments = [];
+			for (var comm = 0; comm < commentNumber; el++) {
+				newElements[] = brackets.currentTextbook.elements[elementNumber].comments[comm];
+			}
+			for (var comm = commentNumber+1; comm < numberOfElements; el++) {
+				newElements[] = brackets.currentTextbook.elements[elementNumber].comments[comm];
+			}
+			brackets.currentTextbook.elements[elementNumber].comments[commentNumber];
+		}
+	}
+	
 }
