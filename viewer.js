@@ -45,8 +45,8 @@ function renderTextbook(container, textbook) {
         container.appendChild(element_container);
         //Render if we know how
         switch (element.type) {
-            case 'pdf': 
-                renderPdfElement(element_container, element.source, element.start, element.end);
+            case 'pdfHorizontal': 
+                renderPdfElement(element_container, element.source, element.startY, element.endY);
                 break;
             case 'youtube':
                 renderYoutubeElement(element_container, element);

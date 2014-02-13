@@ -1,7 +1,6 @@
 
 // The textbook is stored in brackets.currentTextbook
 
-
 function newTextbook() {
 	var newTextbook 		= {};
 	newTextbook.title 		= "Title";
@@ -12,7 +11,7 @@ function newTextbook() {
 
 function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	var newElement 		= {};
-	newElement.type 	= "pdf";
+	newElement.type 	= "pdfRectangle";
 	newElement.source 	= source;
 	newElement.startX 	= startX;
 	newElement.startY 	= startY;
@@ -22,7 +21,15 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	brackets.currentTextbook.elements.add(newElement);
 }
 
-
+function addPDFHorizontalClip(source,startY,endY) {
+	var newElement 		= {};
+	newElement.type 	= "pdfHorizontal";
+	newElement.source 	= source;
+	newElement.startY 	= startY;
+	newElement.endY 	= endY;
+	newElement.comments = [];
+	brackets.currentTextbook.elements.add(newElement);
+}
 
 function addYouTubeVid(source,startTime) {
 	var newElement 		= {};
