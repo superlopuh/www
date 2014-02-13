@@ -1,0 +1,23 @@
+body {
+  background-color: #ccc;
+}
+
+#page {
+  background-color: #fff;
+  width: 800px;
+  margin: 0 auto;
+  padding: 1em;
+  float: left;
+}
+
+#add-buttons li {
+  display: block;
+  width: 140px;
+  height: 90px;
+  float: left;
+  background-color: #eee;
+  margin: 5px;
+  border: 1px solid #000;
+  line-height: 90px;
+  text-align: center;
+}

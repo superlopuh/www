@@ -3,23 +3,28 @@
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Pdf adder prototype</title>
+    <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="make.css" type="text/css" media="screen" title="no title" charset="utf-8">
   </head>
   <body id="index" onload="">
     <div id="page">
 
-    <a href='index.html'>Viewer</a>
-    <!-- <a href='make.html'>Edit</a> -->
-    <!-- <a href='javascript:openTextbook();'>Open Textbook</a> -->
-    <!-- <a href='javascript:saveTextbook();'>Save Textbook</a> -->
+      <a href='index.html'>Viewer</a>
+      <!-- <a href='make.html'>Edit</a> -->
+      <!-- <a href='javascript:openTextbook();'>Open Textbook</a> -->
+      <!-- <a href='javascript:saveTextbook();'>Save Textbook</a> -->
 
-    <a href='clipper.html'>Clipper</a>
-    <a href='viewer_demo.html'>Demo</a>
+      <a href='clipper.html'>Clipper</a>
+      <a href='viewer_demo.html'>Demo</a>
 
       <h1 id="textbook_prototype">Textbook Prototype</h1>
-      <div id="addButton">
-        Add section
-      </div>
+      <ul id="add-buttons">
+        <li id="add-pdf">Add PDF</li>
+        <li id="add-youtube">Add YouTube</li>
+        <li id="add-image">Add Image</li>
+        <li id="add-wiki">Add Wikipedia</li>
+        <li id="add-text">Add Text</li>
+      </ul>
     </div>
 
     <script src="jquery.js"></script>
@@ -28,14 +33,14 @@
     <script>
 
       function addElement() {
-        renderPdfElement($('<div></div>').insertBefore('#addButton').get(0),
+        renderPdfElement($('<div></div>').insertBefore('#add-buttons').get(0),
             window.prompt("url?","http://www.cl.cam.ac.uk/teaching/1314/FJava/workbook4.pdf"),
             window.prompt("start at?",""),
             window.prompt("end at?",""));
       }
 
       $( document ).ready(function() {
-        $('#addButton').click(function() {
+        $('#add-pdf').click(function() {
          addElement();
         });
       });
