@@ -8,15 +8,42 @@
 	<meta charset="utf-8" />
 </head>
 <body>
-  	<a href='make.html'>New Textbook</a>
-	<a href='viewer.html'>Open Textbook</a>
+	<!-- <a href='index.html'>Index</a> -->
+  	<a href='make.html'>Edit</a>
+	<a href='javascript:openTextbook();'>Open Textbook</a>
 	<a href='javascript:saveTextbook();'>Save Textbook</a>
+
 	<a href='clipper.html'>Clipper</a>
 	<a href='viewer_demo.html'>Demo</a>
+
+	<div id="textbook"></div>
 
 	<script src="jquery.js"></script>
 	<script src="pdf.js" type="text/javascript"></script>
 	<script src="compatibility.js" type="text/javascript"></script>
 	<script src="viewer.js" type="text/javascript"></script>
+	<script src="textbook.js" type="text/javascript"></script>
+   	<script>
+   		$(window).load(function() {
+   			if (typeof(brackets.currentTextbook) != "undefined") {
+					renderTextbook(document.getElementById('textbook'),brackets.currentTextbook);
+				}
+		});
+
+   		function openTextbook() {
+    		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+            		$.getJSON(fp, function(textbook) {
+    					brackets.currentTextbook = textbook;
+    					renderTextbook(document.getElementById('textbook'),textbook);
+    				});
+        		});
+		}
+
+		function saveTextbook() {
+    		brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
+    				brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
+    			});
+		}
+	</script>
 </body>
 </html>
