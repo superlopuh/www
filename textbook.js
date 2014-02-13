@@ -19,7 +19,7 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	newElement.endX 	= endX;
 	newElement.endY 	= endY;
 	newElement.comments = [];
-	brackets.currentTextbook.elements[] = newElement;
+	brackets.currentTextbook.elements.add(newElement);
 }
 
 
@@ -30,7 +30,7 @@ function addYouTubeVid(source,startTime) {
 	newElement.source 	= source;
 	newElement.startTime 	= startTime;
 	newElement.comments = [];
-	brackets.currentTextbook.elements[] = newElement;
+	brackets.currentTextbook.elements.add(newElement);
 }
 
 function addText(text) {
@@ -38,7 +38,7 @@ function addText(text) {
 	newElement.type 	= "text";
 	newElement.text 	= text;
 	newElement.comments = [];
-	brackets.currentTextbook.elements[] = newElement;
+	brackets.currentTextbook.elements.add(newElement);
 }
 
 function addWiki(source) {
@@ -46,7 +46,7 @@ function addWiki(source) {
 	newElement.type 	= "wiki";
 	newElement.source 	= source;
 	newElement.comments = [];
-	brackets.currentTextbook.elements[] = newElement;
+	brackets.currentTextbook.elements.add(newElement);
 }
 
 // If within range, delete. Else skip
@@ -55,10 +55,10 @@ function deleteElement(clipNumber) {
 	if (clipNumber >= 0 && clipNumber<numberOfElements) {
 		var newElements = [];
 		for (var el = 0; el < clipNumber; el++) {
-			newElements[] = brackets.currentTextbook.elements[el]
+			newElements.append(brackets.currentTextbook.elements[el]);
 		}
 		for (var el = clipNumber+1; el < numberOfElements; el++) {
-			newElements[] = brackets.currentTextbook.elements[el]
+			newElements.append(brackets.currentTextbook.elements[el]);
 		}
 		brackets.currentTextbook.elements = newElements;
 	}
@@ -75,27 +75,27 @@ function moveElement(oldPosition,newPosition) {
 		var newElements = [];
 		var firstChange = Math.min(oldPosition,newPosition);
 		for (var el = 0; el < firstChange; el++) {
-			newElements[] = brackets.currentTextbook.elements[el];
+			newElements.append(brackets.currentTextbook.elements[el]);
 		}
 		// If move up the page
 		if (oldPosition > newPosition) {
-			newElements[] = brackets.currentTextbook.elements[oldPosition];
+			newElements.append(brackets.currentTextbook.elements[oldPosition]);
 			for (var el = newPosition; el < oldPosition; el++) {
-				newElements[] = brackets.currentTextbook.elements[el]
+				newElements.append(brackets.currentTextbook.elements[el]);
 			}
 			for (var el = oldPosition+1; el < numberOfElements; el++) {
-				newElements[] = brackets.currentTextbook.elements[el]
+				newElements.append(brackets.currentTextbook.elements[el]);
 			}
 			brackets.currentTextbook.elements = newElements;
 		}
 		// If move down the page
 		else {
 			for (var el = oldPosition+1; el <= newPosition; el++) {
-				newElements[] = brackets.currentTextbook.elements[el]
+				newElements.append(brackets.currentTextbook.elements[el]);
 			}
-			newElements[] = brackets.currentTextbook.elements[oldPosition];
+			newElements.append(brackets.currentTextbook.elements[oldPosition]);
 			for (var el = newPosition+1; el < numberOfElements; el++) {
-				newElements[] = brackets.currentTextbook.elements[el]
+				newElements.append(brackets.currentTextbook.elements[el]);
 			}
 			brackets.currentTextbook.elements = newElements;
 		}
@@ -103,23 +103,23 @@ function moveElement(oldPosition,newPosition) {
 }
 
 function addComment(elementNumber,comment,author) {
-	brackets.currentTextbook.elements.comments[] = {
+	brackets.currentTextbook.elements.comments.append({
 		"author"  = author,
 		"comment" = comment
-	};
+	});
 }
 
 function deleteComment(elementNumber,commentNumber) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (elementNumber >= 0 && elementNumber<numberOfElements) {
 		var numberOfComments = brackets.currentTextbook.elements[elementNumber].comments.length;
-		if (brackets.currentTextbook.elements[elementNumber]comments.length > commentNumber) {       // Fix this also fix array.append() vs array[]
+		if (commentNumber >= 0 && commentNumber<numberOfComments) {       // array.append() vs array[]
 			var newComments = [];
 			for (var comm = 0; comm < commentNumber; el++) {
-				newElements[] = brackets.currentTextbook.elements[elementNumber].comments[comm];
+				newElements.add(brackets.currentTextbook.elements[elementNumber].comments[comm]);
 			}
 			for (var comm = commentNumber+1; comm < numberOfElements; el++) {
-				newElements[] = brackets.currentTextbook.elements[elementNumber].comments[comm];
+				newElements.add(brackets.currentTextbook.elements[elementNumber].comments[comm]);
 			}
 			brackets.currentTextbook.elements[elementNumber].comments[commentNumber];
 		}
