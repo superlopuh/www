@@ -110,10 +110,13 @@ function moveElement(oldPosition,newPosition) {
 }
 
 function addComment(elementNumber,comment,author) {
-	brackets.currentTextbook.elements.comments.append({
-		"author"  = author,
-		"comment" = comment
-	});
+	var numberOfElements = brackets.currentTextbook.elements.length;
+	if (elementNumber >= 0 && elementNumber<numberOfElements) {
+		brackets.currentTextbook.elements[elementNumber].comments.append({
+			"author"  = author,
+			"comment" = comment
+		});
+	}
 }
 
 function deleteComment(elementNumber,commentNumber) {
