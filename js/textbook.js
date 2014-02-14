@@ -56,6 +56,21 @@ function addWiki(source) {
 	brackets.currentTextbook.elements.add(newElement);
 }
 
+function previousPDFs() {
+	var pdfLinks = [];
+	var numberOfElements = brackets.currentTextbook.elements.length;
+	for (var el = 0; el < numberOfElements; el++) {
+		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" || 
+			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
+			var tag = "PDF " + el;
+			pdfLinks.append({
+				tag: brackets.currentTextbook.elements[el].source;
+			})
+		}
+	};
+	return pdfLinks;
+}
+
 // If within range, delete. Else skip
 function deleteElement(clipNumber) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
