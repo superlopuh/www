@@ -57,7 +57,12 @@ function renderTextbook(container, textbook) {
 }
 
 function renderYoutubeElement(container, element) {
-    var tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
+    var tag = "";
+    if ((typeof element.start === 'undefined')|(typeof element.end === 'undefined')) {
+        tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"' frameborder='0'></iframe>";
+    } else {
+        tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
+    }
     container.innerHTML = tag;
 }
 
