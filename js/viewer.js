@@ -39,16 +39,24 @@ function renderTextbook(container, textbook) {
         //Render if we know how
         switch (element.type) {
             case 'pdfHorizontal': 
+                element_container.className += " pdfHorizontal";
                 renderPdfHorizontal(element_container, element.source, element.startY, element.endY);
                 break;
             case 'pdfRectangle': 
+                element_container.className += " pdfRectangle";
                 renderPdfRectangle(element_container, element);
                 break;
             case 'youtube':
+                element_container.className += " youtube";
                 renderYoutubeElement(element_container, element);
                 break;
             case 'wikipedia':
+                element_container.className += " wikipedia";
                 renderWikipediaElement(element_container, element);
+                break;
+            case 'image':
+                element_container.className += " image";
+                renderImageElement(element_container, element);
                 break;
             default:
                 break;
@@ -57,8 +65,19 @@ function renderTextbook(container, textbook) {
 }
 
 function renderYoutubeElement(container, element) {
-    var tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
+    var tag = "";
+    if ((typeof element.start === 'undefined')|(typeof element.end === 'undefined')) {
+        tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"' frameborder='0'></iframe>";
+    } else {
+        tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
+    }
     container.innerHTML = tag;
+}
+
+function renderImageElement(container, element) {
+    var image = document.createElement('img');
+    image.src = element.source;
+    container.appendChild(image);
 }
 
 function renderWikipediaElement(container, element) {
@@ -146,6 +165,13 @@ function renderPdfClip(canvas_id, pdf_url, page_no, y1, y2) {
 }
 
 function renderPdfRectangle(container, pdfRect) {
+    // Check for valid inputs
+    if ((pdfRect.startX>1)|(pdfRect.endX>1)|(pdfRect.startY>1)|(pdfRect.endY>1)|
+        (pdfRect.startX<0)|(pdfRect.endX<0)|(pdfRect.startY<0)|(pdfRect.endY<0)) {
+        console.log("Could not render pdfRectangle ('"+pdfRect.source+'). These can not extend outside of page boundaries. So startX, startY, endX, and endY parameters must to between 0 and 1.');
+        return;
+    }
+
     // NOTE:
     // Using a PDF from another server will likely *NOT* work. Because of browser
     // security restrictions, we have to use a file server with special headers
