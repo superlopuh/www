@@ -41,7 +41,7 @@ function renderTextbook(container, textbook) {
     $.each(textbook.elements, function( index, element ) {
         //Create element container
         var element_container = document.createElement('div');
-        element_container.id = container.id+'_'+index;
+        element_container.className += "wrapper";
         container.appendChild(element_container);
         //Render if we know how
         switch (element.type) {
@@ -78,22 +78,28 @@ function renderPdfElement(container, pdf_url, start, end) {
     var start_y = start-start_page;
     var end_page = Math.floor(end);
     var end_y = end-end_page;
-    //Loop through, creating a new canvas for each page
-    for (var i = start_page; i <= end_page; i++) {
+    //If is just a single page
+    if (start_page==end_page) {
         var canvas = document.createElement('canvas');
-        canvas.id = container.id+'_page_'+i;
         container.appendChild(canvas);
-        switch(i) {
-            case start_page:
-                renderPdfClip(canvas.id, pdf_url, i, start_y, 1);
-                break;
-            case end_page:
-                renderPdfClip(canvas.id, pdf_url, i, 0, end_y);
-                break;
-            default:
-                renderPdfClip(canvas.id, pdf_url, i, 0, 1);
-        }
-    };
+        renderPdfClip(canvas.id, pdf_url, start_page, start_y, end_y);
+    } else {
+        //Else loop through, creating a new canvas for each page
+        for (var i = start_page; i <= end_page; i++) {
+            var canvas = document.createElement('canvas');
+            container.appendChild(canvas);
+            switch(i) {
+                case start_page:
+                    renderPdfClip(canvas.id, pdf_url, i, start_y, 1);
+                    break;
+                case end_page:
+                    renderPdfClip(canvas.id, pdf_url, i, 0, end_y);
+                    break;
+                default:
+                    renderPdfClip(canvas.id, pdf_url, i, 0, 1);
+            }
+        }  
+    }
 }
 
 /*

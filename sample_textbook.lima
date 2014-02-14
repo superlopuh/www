@@ -22,9 +22,9 @@
       }, 
       {
           "type": "pdfHorizontal",
-          "source": "http://www.cl.cam.ac.uk/teaching/1314/CompDesign/cam-only/ComputerDesignHandouts2013.pdf",
-          "startY": 1.2,
-          "endY": 2.7
+          "source": "http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf",
+          "startY": 5.2,
+          "endY": 5.8
       }
   ]
 }
