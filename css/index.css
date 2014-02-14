@@ -16,3 +16,18 @@ body {
     max-width: 90%;
     background-color: #ffffff;
 }
+
+/* Fluid width youtube embeds */
+.textbook_container .youtube {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.textbook_container .youtube iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
