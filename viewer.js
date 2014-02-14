@@ -81,12 +81,14 @@ function renderPdfElement(container, pdf_url, start, end) {
     //If is just a single page
     if (start_page==end_page) {
         var canvas = document.createElement('canvas');
+        canvas.id = container.id + "_page_0"; 
         container.appendChild(canvas);
         renderPdfClip(canvas.id, pdf_url, start_page, start_y, end_y);
     } else {
         //Else loop through, creating a new canvas for each page
         for (var i = start_page; i <= end_page; i++) {
             var canvas = document.createElement('canvas');
+            canvas.id = container.id + "_page_"+i;
             container.appendChild(canvas);
             switch(i) {
                 case start_page:

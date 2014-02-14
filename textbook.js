@@ -50,7 +50,7 @@ function addText(text) {
 
 function addWiki(source) {
 	var newElement 		= {};
-	newElement.type 	= "wiki";
+	newElement.type 	= "wikipedia";
 	newElement.source 	= source;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.add(newElement);
@@ -74,7 +74,7 @@ function deleteElement(clipNumber) {
 // Move element at index oldPosition in between element at index newPosition and the element at index (newPosition+1)
 function moveElement(oldPosition,newPosition) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
-	if (oldPosition >= 0 && oldPosition<numberOfElements
+	if (oldPosition >= 0 && oldPosition<numberOfElements &&
 		newPosition >= 0 && newPosition<numberOfElements) {
 		// If no change then return
 		if (oldPosition == newPosition) {return;}
@@ -113,8 +113,8 @@ function addComment(elementNumber,comment,author) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (elementNumber >= 0 && elementNumber<numberOfElements) {
 		brackets.currentTextbook.elements[elementNumber].comments.append({
-			"author"  = author,
-			"comment" = comment
+			"author"  : author,
+			"comment" : comment
 		});
 	}
 }
