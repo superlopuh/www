@@ -22,7 +22,10 @@
    	<script>
    		$(window).load(function() {
         	var container = document.getElementById('textbook');
-   			loadJsonTextbook(container, 'sample_textbook.lima');
+        	// Loads JSON textbook, calls inline function on success
+		    $.getJSON('sample_textbook.lima', function(textbook) {
+		        renderTextbook(container, textbook);
+		    });
 		});
 	</script>
 </body>

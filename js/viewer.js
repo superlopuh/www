@@ -34,6 +34,7 @@ function renderTextbook(container, textbook) {
         //Create element container
         var element_container = document.createElement('div');
         element_container.className += "wrapper";
+        element_container.id = container.id+'_'+index;
         container.appendChild(element_container);
         //Render if we know how
         switch (element.type) {
@@ -76,7 +77,7 @@ function renderPdfHorizontal(container, pdf_url, start, end) {
     //If is just a single page
     if (start_page==end_page) {
         var canvas = document.createElement('canvas');
-        canvas.id = container.id + "_page_0"; 
+        canvas.id = container.id + "_page_"+start_page; 
         container.appendChild(canvas);
         renderPdfClip(canvas.id, pdf_url, start_page, start_y, end_y);
     } else {
@@ -136,6 +137,44 @@ function renderPdfClip(canvas_id, pdf_url, page_no, y1, y2) {
         canvas.height = viewport.height*(y2-y1);
         canvas.width = viewport.width;
         context.translate(0,-(viewport.height*y1));
+
+        // Render PDF page into canvas context
+        page.render({canvasContext: context, viewport: viewport});
+      });
+    });
+
+}
+
+function renderPdfRectangle(container, pdfRect) {
+    // NOTE:
+    // Using a PDF from another server will likely *NOT* work. Because of browser
+    // security restrictions, we have to use a file server with special headers
+    // (CORS) - most servers don't support cross-origin browser requests.
+    // ----> why we're making a locally run web application.
+
+    // Disable workers to avoid yet another cross-origin issue (workers need the URL of
+    // the script to be loaded, and dynamically loading a cross-origin script does
+    // not work)
+    PDFJS.disableWorker = true;
+
+    // Asynchronous download PDF as an ArrayBuffer
+    PDFJS.getDocument(pdfRect.source).then(function getClipViewer(pdf) {
+      // Fetch the first page
+      pdf.getPage(pdfRect.page).then(function getPageClipViewer(page) {
+        var scale = 1.5;
+        var viewport = page.getViewport(scale);
+
+        // Prepare canvas using PDF page dimensions
+        var canvas = document.createElement('canvas');
+        canvas.id = container.id + "_page_"+pdfRect.page; 
+        container.appendChild(canvas);
+        var context = canvas.getContext('2d');
+
+        // Displacement and clipping of pages
+        canvas.height = viewport.height*(pdfRect.endY-pdfRect.startY);
+        canvas.width = viewport.width*(pdfRect.endX-pdfRect.startX);
+        context.translate(-(viewport.width*pdfRect.startX),-(viewport.height*pdfRect.startY));
+
 
         // Render PDF page into canvas context
         page.render({canvasContext: context, viewport: viewport});
