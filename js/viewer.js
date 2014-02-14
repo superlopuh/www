@@ -146,6 +146,13 @@ function renderPdfClip(canvas_id, pdf_url, page_no, y1, y2) {
 }
 
 function renderPdfRectangle(container, pdfRect) {
+    // Check for valid inputs
+    if ((pdfRect.startX>1)|(pdfRect.endX>1)|(pdfRect.startY>1)|(pdfRect.endY>1)|
+        (pdfRect.startX<0)|(pdfRect.endX<0)|(pdfRect.startY<0)|(pdfRect.endY<0)) {
+        console.log("Could not render pdfRectangle ('"+pdfRect.source+'). These can not extend outside of page boundaries. So startX, startY, endX, and endY parameters must to between 0 and 1.');
+        return;
+    }
+
     // NOTE:
     // Using a PDF from another server will likely *NOT* work. Because of browser
     // security restrictions, we have to use a file server with special headers
