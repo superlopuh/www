@@ -12,9 +12,14 @@ body {
 .textbook_container header {
     margin: 4em 0 4em 0;
 }
-.textbook_container canvas, .textbook_container .image img {
-    max-width: 90%;
+.textbook_container canvas {
+	width: 90%;
     background-color: #ffffff;
+}
+
+.textbook_container .image img, 
+.textbook_container .pdfRectangle {
+    max-width: 90%;
 }
 
 .buttons {
@@ -70,10 +75,12 @@ body {
 }.link:active {
 	position:relative;
 	top:1px;
-}</style>
+}
 
 /* This button was generated using CSSButtonGenerator.com */
 
+
+/* Fluid width youtube videos */
 .textbook_container .youtube {
 	position: relative;
 	padding-bottom: 56.25%; /* 16:9 */
