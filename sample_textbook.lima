@@ -9,6 +9,10 @@
           "endY": 4.4
       },
       {
+          "type": "image",
+          "source": "http://www.sorting-algorithms.com/animation/40/random-initial-order/heap-sort.gif"
+      },
+      {
           "type": "pdfRectangle",
           "source": "https://bitcoin.org/bitcoin.pdf",
           "startX": 0.3, "startY": 0.5, 
@@ -18,8 +22,8 @@
       {
           "type": "youtube",
           "source": "B7hVxCmfPtM",
-          "startY": 30, 
-          "endY": 100
+          "start": 30, 
+          "end": 100
       },
       {
           "type": "pdfHorizontal",

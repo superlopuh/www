@@ -50,6 +50,9 @@ function renderTextbook(container, textbook) {
             case 'wikipedia':
                 renderWikipediaElement(element_container, element);
                 break;
+            case 'image':
+                renderImageElement(element_container, element);
+                break;
             default:
                 break;
         }
@@ -64,6 +67,12 @@ function renderYoutubeElement(container, element) {
         tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
     }
     container.innerHTML = tag;
+}
+
+function renderImageElement(container, element) {
+    var image = document.createElement('img');
+    image.src = element.source;
+    container.appendChild(image);
 }
 
 function renderWikipediaElement(container, element) {
