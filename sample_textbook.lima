@@ -32,6 +32,10 @@
           "endY": 2.7
       }, 
       {
+          "type": "image",
+          "source": "http://ww2.kcd.org/acp/Ch12/HeapSortPage1.jpg"
+      },
+      {
           "type": "pdfHorizontal",
           "source": "http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf",
           "startY": 5.2,

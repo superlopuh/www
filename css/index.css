@@ -12,7 +12,7 @@ body {
 .textbook_container header {
     margin: 4em 0 4em 0;
 }
-.textbook_container canvas {
+.textbook_container canvas, .textbook_container .image img {
     max-width: 90%;
     background-color: #ffffff;
 }
