@@ -62,12 +62,12 @@ body {
 	text-align:center;
 	text-shadow:1px 1px 0px #b23e35;
 }
-.Link:hover {
+.link:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
 	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
 	background-color:#ce0100;
-}.Link:active {
+}.link:active {
 	position:relative;
 	top:1px;
 }</style>
