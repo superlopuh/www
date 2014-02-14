@@ -32,6 +32,7 @@
 
    		function openTextbook() {
     		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+    				$("#textbook").html("");
             		$.getJSON(fp, function(textbook) {
     					brackets.currentTextbook = textbook;
     					renderTextbook(document.getElementById('textbook'),textbook);
