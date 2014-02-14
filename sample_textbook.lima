@@ -14,10 +14,10 @@
       },
       {
           "type": "pdfRectangle",
-          "source": "https://bitcoin.org/bitcoin.pdf",
-          "startX": 0.3, "startY": 0.5, 
-          "endX": 0.4, "endY": 0.9,
-          "page": 3
+          "source": "http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf",
+          "startX": 0, "startY": 0.25, 
+          "endX": 1, "endY": 0.55,
+          "page": 47
       },
       {
           "type": "youtube",
