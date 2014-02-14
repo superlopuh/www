@@ -14,14 +14,6 @@
     This file requires the jQuery library and pdf.js to be included in the page to function correctly.
 */
 
-/*Note: the 'container' variable refers to an actual DOM element, not its ID*/
-function loadJsonTextbook(container, source) {
-    // Loads JSON textbook, calls inline function on success
-    $.getJSON( source, function(textbook) {
-        renderTextbook(container, textbook);
-    });
-}
-
 /*Note the 'container' variable refers to an actual DOM element, not its ID*/
 function renderTextbook(container, textbook) {
     container.className += " textbook_container";
