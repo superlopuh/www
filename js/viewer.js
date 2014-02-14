@@ -38,7 +38,10 @@ function renderTextbook(container, textbook) {
         //Render if we know how
         switch (element.type) {
             case 'pdfHorizontal': 
-                renderPdfElement(element_container, element.source, element.startY, element.endY);
+                renderPdfHorizontal(element_container, element.source, element.startY, element.endY);
+                break;
+            case 'pdfRectangle': 
+                renderPdfRectangle(element_container, element);
                 break;
             case 'youtube':
                 renderYoutubeElement(element_container, element);
@@ -64,7 +67,7 @@ function renderWikipediaElement(container, element) {
     });
 }
 
-function renderPdfElement(container, pdf_url, start, end) {
+function renderPdfHorizontal(container, pdf_url, start, end) {
     //Unpack start and end variables
     var start_page = Math.floor(start);
     var start_y = start-start_page;
@@ -100,7 +103,7 @@ function renderPdfElement(container, pdf_url, start, end) {
 renderPdfClip
 -------------
 Aim of this is to render a snippet of a PDF on a page. Seems to work mostly.... 
-This is done based on a start_y, and en_y of a page, on a page by page basis. 
+This is done based on a start_y, and end_y of a page, on a page by page basis. 
 These are used as fractions of the whole page (.
 
 This is done by modifying the height and width of the canvas element that pdf.js renders to. It 
