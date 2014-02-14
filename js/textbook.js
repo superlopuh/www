@@ -56,6 +56,21 @@ function addWiki(source) {
 	brackets.currentTextbook.elements.add(newElement);
 }
 
+function previousPDFs() {
+	var pdfLinks = [];
+	var numberOfElements = brackets.currentTextbook.elements.length;
+	for (var el = 0; el < numberOfElements; el++) {
+		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" || 
+			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
+			var tag = "PDF " + el;
+			pdfLinks.append({
+				tag: brackets.currentTextbook.elements[el].source;
+			})
+		}
+	};
+	return pdfLinks;
+}
+
 // If within range, delete. Else skip
 function deleteElement(clipNumber) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
@@ -109,6 +124,8 @@ function moveElement(oldPosition,newPosition) {
 	};
 }
 
+// Comment functions below
+
 function addComment(elementNumber,comment,author) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (elementNumber >= 0 && elementNumber<numberOfElements) {
@@ -134,4 +151,44 @@ function deleteComment(elementNumber,commentNumber) {
 			brackets.currentTextbook.elements[elementNumber].comments = newComments;
 		}
 	}
+}
+
+function getCommentAuthors() {
+	var authors = [];
+	var numberOfElements = brackets.currentTextbook.elements.length;
+	var numberOfComments = 0;
+	for (var el = 0; el < numberOfElements; el++) {
+		numberOfComments = brackets.currentTextbook.elements[el].comments.length;
+		for (var comm = 0; comm < numberOfComments; comm++) {
+			if (!(authors.contains(brackets.currentTextbook.elements[el].comments[comm].author))) {
+				authors.append(brackets.currentTextbook.elements[el].comments[comm].author);
+			}
+		}
+	}
+	return authors;
+}
+
+var contains = function(needle) {
+	contains = function(needle) {
+		for (var i = 0; i < this.length; i++) {
+			if(this[i] === needle) {
+				return true;
+			}
+		}
+	};
+	return contains.call(this, needle);
+}
+
+function noCommentTextbook() {
+	var virginTextbook = {
+		"title": brackets.currentTextbook.title;
+		"author": brackets.currentTextbook.author;
+		"elements": []
+	};
+	brackets.currentTextbook.elements.forEach(function(element) {
+		var virginElement = element;
+		virginElement.comments = [];
+		virginTextbook.elements.append(virginElement);
+	});
+	return virginTextbook;
 }
