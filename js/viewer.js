@@ -39,18 +39,23 @@ function renderTextbook(container, textbook) {
         //Render if we know how
         switch (element.type) {
             case 'pdfHorizontal': 
+                element_container.className += " pdfHorizontal";
                 renderPdfHorizontal(element_container, element.source, element.startY, element.endY);
                 break;
             case 'pdfRectangle': 
+                element_container.className += " pdfRectangle";
                 renderPdfRectangle(element_container, element);
                 break;
             case 'youtube':
+                element_container.className += " youtube";
                 renderYoutubeElement(element_container, element);
                 break;
             case 'wikipedia':
+                element_container.className += " wikipedia";
                 renderWikipediaElement(element_container, element);
                 break;
             case 'image':
+                element_container.className += " image";
                 renderImageElement(element_container, element);
                 break;
             default:
