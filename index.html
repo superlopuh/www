@@ -33,13 +33,61 @@
     <h1>Welcome to <b>BookJockey</b>. <small>Click 'New' above to get started!</small></h1>
   </div>
 
-  <ul id="add-buttons">
+<!--   <ul id="add-buttons">
     <li id="add-pdf"><button type="button" class="btn btn-default">Add PDF</button></li>
     <li id="add-youtube"><button type="button" class="btn btn-default">Add YouTube</button></li>
     <li id="add-image"><button type="button" class="btn btn-default">Add Image</button></li>
     <li id="add-wiki"><button type="button" class="btn btn-default">Add Wikipedia</button></li>
     <li id="add-text"><button type="button" class="btn btn-default">Add Text</button></li>
-	</ul>
+	</ul> -->
+
+  <!-- Nav tabs -->
+  <div id="add-wrapper">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#add-pdf" data-toggle="tab">Add PDF</a></li>
+      <li><a href="#add-youtube" data-toggle="tab">Add YouTube</a></li>
+      <li><a href="#add-image" data-toggle="tab">Add Image</a></li>
+      <li><a href="#add-wiki" data-toggle="tab">Add Wikipedia</a></li>
+      <li><a href="#add-text" data-toggle="tab">Add Text</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="add-pdf">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputPdfUrl" class="col-sm-2 control-label">URL of PDF</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputPdfUrl" placeholder="URL of PDF">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success pull-right">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" id="add-youtube">...</div>
+      <div class="tab-pane" id="add-image">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputImageUrl" class="col-sm-2 control-label">URL of Image</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" id="inputImageUrl" placeholder="URL of Image">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-success pull-right">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" id="add-wiki">...</div>
+      <div class="tab-pane" id="add-text">...</div>
+    </div>
+  </div>
 
 	<script src="libraries/jquery.js"></script>
 	<script src="libraries/pdf.js" type="text/javascript"></script>
@@ -66,7 +114,7 @@
 
     $( document ).ready(function() {
 
-      $('#add-buttons').hide();
+      $('#add-wrapper').hide();
 
       $('#add-pdf').click(function() {
        addElement();
