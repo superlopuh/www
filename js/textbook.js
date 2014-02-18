@@ -76,11 +76,15 @@ function commentIsWellDefined(comment) {
 }
 
 function modifyTitle(newTitle) {
-	brackets.currentTextbook.title = newTitle;
+	if (newTitle.length) {
+		brackets.currentTextbook.title = newTitle;
+	}
 }
 
 function modifyAuthor(newAuthor) {
-	brackets.currentTextbook.author = newAuthor;
+	if (newAuthor.length) {
+		brackets.currentTextbook.author = newAuthor;
+	}
 }
 
 function addPDFRectangleClip(source,startX,startY,endX,endY) {
