@@ -10,6 +10,12 @@
           "comments": []
       },
       {
+          "type": "wikipedia",
+          "page": "heapsort", 
+          "start": 538, 
+          "end": 2000
+      },
+      {
           "type": "image",
           "source": "http://www.sorting-algorithms.com/animation/40/random-initial-order/heap-sort.gif",
           "comments": []

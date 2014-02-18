@@ -82,6 +82,17 @@ function renderImageElement(container, element) {
 }
 
 function renderWikipediaElement(container, element) {
+    $.ajax({
+        url: "http://en.wikipedia.org/w/index.php?action=render&title="+element.page,
+        cache: false
+    }).done(function( html ) {
+        container.innerHTML = html.substring(element.start,element.end);
+        $('.wikipedia a').contents().unwrap();
+        $('.wikipedia img').attr('src', function(index, src) { return 'http:' + src; });
+    });
+}
+
+function renderTextElement(container, element) {
     var source = "http://en.wikipedia.org/w/api.php?action=parse&page="+element.page+"&format=json";
     $.getJSON( source, function(page) {
         container.innerHTML = page.parse.text['*'];
