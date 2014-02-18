@@ -87,7 +87,13 @@
   		brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
   				brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
   			});
-	}
-</script>
+  	}
+
+    function newTextbook() {
+      $('#textbook').addClass("textbook_container")
+          .html('<div class="bs-callout bs-callout-info"><h4>Your textbook is currently empty.</h4> <p>Click a button below to add content.</p>');
+      $('#add-buttons').show();
+    }
+  </script>
 </body>
 </html>
