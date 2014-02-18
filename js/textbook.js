@@ -142,7 +142,7 @@ function previousPDFs() {
 			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
 			var tag = "PDF " + el;
 			pdfLinks.append({
-				tag: brackets.currentTextbook.elements[el].source;
+				tag: brackets.currentTextbook.elements[el].source
 			})
 		}
 	};
@@ -259,8 +259,8 @@ var contains = function(needle) {
 
 function noCommentTextbook() {
 	var virginTextbook = {
-		"title": brackets.currentTextbook.title;
-		"author": brackets.currentTextbook.author;
+		"title": brackets.currentTextbook.title,
+		"author": brackets.currentTextbook.author,
 		"elements": []
 	};
 	brackets.currentTextbook.elements.forEach(function(element) {

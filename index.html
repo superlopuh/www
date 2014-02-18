@@ -72,6 +72,7 @@
        addElement();
       });
 
+<<<<<<< HEAD
       $('#edit-button').click(function() {
       	$('#add-buttons').show();
       })
@@ -86,6 +87,17 @@
 			  });
   		});
     }
+=======
+ 	function openTextbook() {
+		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+				$("#textbook").html("");
+       	$.getJSON("file:///"+fp, function(textbook) {
+		 	    brackets.currentTextbook = textbook;
+					renderTextbook(document.getElementById('textbook'), textbook);
+				});
+    });
+	}
+>>>>>>> 88f1f90b0498a4c53615485f0db1722b07cca0ca
 
   	function saveTextbook() {
     		brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
