@@ -54,6 +54,7 @@ function elementIsWellDefined(element) {
 			case 'youtube':
 			case 'text' :
 			case 'wikipedia':
+			case 'image':
 			default:
 				return false;
 				break;
