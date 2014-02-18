@@ -49,10 +49,12 @@
 		});
 
 	      function addElement() {
-	        renderPdfHorizontal($('<div></div>').insertBefore('#add-buttons').get(0),
-	            window.prompt("url?","http://www.cl.cam.ac.uk/teaching/1314/FJava/workbook4.pdf"),
-	            window.prompt("start at?",""),
-	            window.prompt("end at?",""));
+	      	var element = new Object();
+	      	element.source =  window.prompt("url?","http://www.cl.cam.ac.uk/teaching/1314/FJava/workbook4.pdf");
+	      	element.startY =  window.prompt("start at?","");
+	      	element.endY = window.prompt("end at?","");
+
+	        renderPdfHorizontal($('<div></div>').insertBefore('#add-buttons').get(0), element);
 	      }
 
 	      $( document ).ready(function() {
