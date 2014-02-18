@@ -1,6 +1,6 @@
 /*
-    viewer.js (dj311)
-    =================
+    viewer.js
+    =========
     This file contains all procedures related to the rendering of textbook files within a page.
 
     If you have a textbook object already, use renderTextbook(), otherwise loadJsonTextbook() will 
@@ -30,11 +30,13 @@ function renderTextbook(container, textbook) {
     author.className += "author";
     header.appendChild(author);
 
-    $.each(textbook.elements, function( index, element ) {
+    $.each(textbook.elements, function( index, element ) { renderTextbookElement(container, element); });
+}
+
+function renderTextbookElement(container, element) {
         //Create element container
         var element_container = document.createElement('div');
         element_container.className += "wrapper";
-        element_container.id = container.id+'_'+index;
         container.appendChild(element_container);
         //Render if we know how
         switch (element.type) {
@@ -61,7 +63,6 @@ function renderTextbook(container, textbook) {
             default:
                 break;
         }
-    });
 }
 
 function renderYoutubeElement(container, element) {
@@ -96,24 +97,22 @@ function renderPdfHorizontal(container, pdf_url, start, end) {
     //If is just a single page
     if (start_page==end_page) {
         var canvas = document.createElement('canvas');
-        canvas.id = container.id + "_page_"+start_page; 
         container.appendChild(canvas);
-        renderPdfClip(canvas.id, pdf_url, start_page, start_y, end_y);
+        renderPdfClip(canvas, pdf_url, start_page, start_y, end_y);
     } else {
         //Else loop through, creating a new canvas for each page
         for (var i = start_page; i <= end_page; i++) {
             var canvas = document.createElement('canvas');
-            canvas.id = container.id + "_page_"+i;
             container.appendChild(canvas);
             switch(i) {
                 case start_page:
-                    renderPdfClip(canvas.id, pdf_url, i, start_y, 1);
+                    renderPdfClip(canvas, pdf_url, i, start_y, 1);
                     break;
                 case end_page:
-                    renderPdfClip(canvas.id, pdf_url, i, 0, end_y);
+                    renderPdfClip(canvas, pdf_url, i, 0, end_y);
                     break;
                 default:
-                    renderPdfClip(canvas.id, pdf_url, i, 0, 1);
+                    renderPdfClip(canvas, pdf_url, i, 0, 1);
             }
         }  
     }
@@ -129,7 +128,7 @@ These are used as fractions of the whole page (.
 This is done by modifying the height and width of the canvas element that pdf.js renders to. It 
 then using canvas.translate to move to the correct section of the page.
 */
-function renderPdfClip(canvas_id, pdf_url, page_no, y1, y2) {
+function renderPdfClip(canvas, pdf_url, page_no, y1, y2) {
     // NOTE:
     // Using a PDF from another server will likely *NOT* work. Because of browser
     // security restrictions, we have to use a file server with special headers
@@ -149,7 +148,6 @@ function renderPdfClip(canvas_id, pdf_url, page_no, y1, y2) {
         var viewport = page.getViewport(scale);
 
         // Prepare canvas using PDF page dimensions
-        var canvas = document.getElementById(canvas_id);
         var context = canvas.getContext('2d');
 
         // Displacement and clipping of pages
