@@ -15,11 +15,12 @@
 	<div class = "header">
 		<div class = "buttons">
 			<div class = "left">
-        <button id="edit-button" type="button" class="btn btn-primary">Edit</button>
   		</div>
   		<div class = "right">
+        <button id="new-button" type="button" onclick="javascript:newTextbook();" class="btn btn-primary">New</button>
         <button id="open-button" type="button" onclick="javascript:openTextbook();" class="btn btn-primary">Open</button>
-        <button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-primary">Save</button>
+        <button id="edit-button" type="button" class="btn btn-primary">Edit</button>
+        <button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-success">Save</button>
 		  </div>
 		</div>
 	<!-- 	<div>
@@ -29,14 +30,15 @@
 	</div>
 
 	<div id="textbook">
+    <h1>Welcome to <b>BookJockey</b>. <small>Click 'New' above to get started!</small></h1>
   </div>
 
   <ul id="add-buttons">
-    <li id="add-pdf"><a>Add PDF</a></li>
-    <li id="add-youtube"><a>Add YouTube</a></li>
-    <li id="add-image"><a>Add Image</a></li>
-    <li id="add-wiki"><a>Add Wikipedia</a></li>
-    <li id="add-text"><a>Add Text</a></li>
+    <li id="add-pdf"><button type="button" class="btn btn-default">Add PDF</button></li>
+    <li id="add-youtube"><button type="button" class="btn btn-default">Add YouTube</button></li>
+    <li id="add-image"><button type="button" class="btn btn-default">Add Image</button></li>
+    <li id="add-wiki"><button type="button" class="btn btn-default">Add Wikipedia</button></li>
+    <li id="add-text"><button type="button" class="btn btn-default">Add Text</button></li>
 	</ul>
 
 	<script src="libraries/jquery.js"></script>
@@ -51,42 +53,42 @@
  			if (typeof(brackets.currentTextbook) != "undefined") {
 				renderTextbook(document.getElementById('textbook'),brackets.currentTextbook);
 			}
-	});
+    });
 
-      function addElement() {
-      	var element = new Object();
-      	element.source =  window.prompt("url?","http://www.cl.cam.ac.uk/teaching/1314/FJava/workbook4.pdf");
-      	element.startY =  window.prompt("start at?","");
-      	element.endY = window.prompt("end at?","");
+    function addElement() {
+    	var element = new Object();
+    	element.source =  window.prompt("url?","http://www.cl.cam.ac.uk/teaching/1314/FJava/workbook4.pdf");
+    	element.startY =  window.prompt("start at?","");
+    	element.endY = window.prompt("end at?","");
 
-        renderPdfHorizontal($('<div></div>').insertBefore('#add-buttons').get(0), element);
-      }
+      renderPdfHorizontal($('<div></div>').insertBefore('#add-buttons').get(0), element);
+    }
 
-      $( document ).ready(function() {
+    $( document ).ready(function() {
 
-        $('#add-buttons').hide();
+      $('#add-buttons').hide();
 
-        $('#add-pdf').click(function() {
-         addElement();
-        });
-
-        $('#edit-button').click(function() {
-        	$('#add-buttons').show();
-        })
+      $('#add-pdf').click(function() {
+       addElement();
       });
 
- 		function openTextbook() {
-  		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
-  				$("#textbook").html("");
-          		$.getJSON(fp, function(textbook) {
-  					brackets.currentTextbook = textbook;
-  					renderTextbook(document.getElementById('textbook'),textbook);
-  				});
-      		});
-	}
+      $('#edit-button').click(function() {
+      	$('#add-buttons').show();
+      })
+    });
 
-	function saveTextbook() {
-  		brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
+		function openTextbook() {
+  		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+  			$("#textbook").empty();
+      	$.getJSON("file:///" + fp, function(textbook) {
+          brackets.currentTextbook = textbook;
+          renderTextbook(document.getElementById('textbook'),textbook);
+			  });
+  		});
+    }
+
+  	function saveTextbook() {
+    		brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
   				brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
   			});
   	}
