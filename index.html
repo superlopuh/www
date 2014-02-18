@@ -73,14 +73,17 @@
         })
       });
 
- 		function openTextbook() {
-  		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
-  				$("#textbook").html("");
-          		$.getJSON(fp, function(textbook) {
-  					brackets.currentTextbook = textbook;
-  					renderTextbook(document.getElementById('textbook'),textbook);
-  				});
-      		});
+ 	function openTextbook() {
+		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+				$("#textbook").html("");
+        alert(fp);
+       	$.getJSON("file:///"+fp, function(textbook) {
+          alert(JSON.stringify(textbook));
+		 	    brackets.currentTextbook = textbook;
+					renderTextbook(document.getElementById('textbook'), textbook);
+				});
+        alert("hmm");
+    });
 	}
 
 	function saveTextbook() {
