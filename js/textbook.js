@@ -134,6 +134,14 @@ function addWiki(source) {
 	brackets.currentTextbook.elements.add(newElement);
 }
 
+function addImage(source) {
+	var newElement 		= {};
+	newElement.type 	= "image";
+	newElement.source 	= source;
+	newElement.comments = [];
+	brackets.currentTextbook.elements.add(newElement);
+}
+
 function previousPDFs() {
 	var pdfLinks = [];
 	var numberOfElements = brackets.currentTextbook.elements.length;
