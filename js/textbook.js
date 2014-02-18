@@ -9,6 +9,72 @@ function newTextbook() {
 	return newTextbook;
 }
 
+function textbookIsWellDefined(textbook) {
+	if (typeof(textbook.title) != "string") {
+		return false;
+	}
+	else if (typeof(textbook.author) != "string") {
+		return false;
+	}
+	else if (!(textbook.elements.isArray)) {
+		return false;
+	}
+	else {
+		var numberOfElements = textbook.elements.length;
+		for (var el = 0; el < numberOfElements; el++) {
+			if (!(elementIsWellDefined(textbook.elements[el]))) return false;
+		}
+		return true;
+	}
+}
+
+function elementIsWellDefined(element) {
+	// Check that element has a type that is a string
+	if (typeof(element.type) != "string") {
+		return false;
+	}
+	// Check that element has comments
+	else if (!(element.comments.isArray)) {
+		return false;
+	}
+	// Check that element has a source that is a string
+	else if (typeof(element.source) != "string") {
+		return false;
+	}
+	else {
+		// Check that comments are well defined
+		var numberOfComments = element.comments.length;
+		for (var comm = 0; comm < numberOfComments; comm++) {
+			if (!(commentIsWellDefined(element.comments[comm]))) return false;
+		}
+		// Check that rest is well defined for the different types of elements
+		switch(element.type) {
+			case 'pdfRectangle':
+			case 'pdfHorizontal':
+			case 'youtube':
+			case 'text' :
+			case 'wikipedia':
+			default:
+				return false;
+				break;
+		}	
+	}
+}
+
+function commentIsWellDefined(comment) {
+	// Check that comment has an author that is a string
+	if (typeof(comment.author) != "string") {
+		return false;
+	}
+	// Check that comment has a comment that is a string
+	else if (typeof(comment.comment) != "string") {
+		return false;
+	}
+	else {
+		return true;
+	}
+}
+
 function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	var newElement 		= {};
 	newElement.type 	= "pdfRectangle";
@@ -32,11 +98,11 @@ function addPDFHorizontalClip(source,startY,endY) {
 }
 
 function addYouTubeVid(source,startTime) {
-	var newElement 		= {};
-	newElement.type 	= "youtube";
-	newElement.source 	= source;
-	newElement.startTime 	= startTime;
-	newElement.comments = [];
+	var newElement 		 = {};
+	newElement.type 	 = "youtube";
+	newElement.source 	 = source;
+	newElement.startTime = startTime;
+	newElement.comments  = [];
 	brackets.currentTextbook.elements.add(newElement);
 }
 
@@ -126,7 +192,7 @@ function moveElement(oldPosition,newPosition) {
 
 // Comment functions below
 
-function addComment(elementNumber,comment,author) {
+function addComment(elementNumber,author,comment) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (elementNumber >= 0 && elementNumber<numberOfElements) {
 		brackets.currentTextbook.elements[elementNumber].comments.append({
