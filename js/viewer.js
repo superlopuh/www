@@ -42,7 +42,7 @@ function renderElement(container, element) {
         switch (element.type) {
             case 'pdfHorizontal': 
                 element_container.className += " pdfHorizontal";
-                renderPdfHorizontal(element_container, element.source, element.startY, element.endY);
+                renderPdfHorizontal(element_container, element);
                 break;
             case 'pdfRectangle': 
                 element_container.className += " pdfRectangle";
@@ -88,17 +88,17 @@ function renderWikipediaElement(container, element) {
     });
 }
 
-function renderPdfHorizontal(container, pdf_url, start, end) {
+function renderPdfHorizontal(container, element) {
     //Unpack start and end variables
-    var start_page = Math.floor(start);
-    var start_y = start-start_page;
-    var end_page = Math.floor(end);
-    var end_y = end-end_page;
+    var start_page = Math.floor(element.startY);
+    var start_y = element.startY-start_page;
+    var end_page = Math.floor(element.endY);
+    var end_y = element.endY-end_page;
     //If is just a single page
     if (start_page==end_page) {
         var canvas = document.createElement('canvas');
         container.appendChild(canvas);
-        renderPdfClip(canvas, pdf_url, start_page, start_y, end_y);
+        renderPdfClip(canvas, element.source, start_page, 0, start_y, 1, end_y);
     } else {
         //Else loop through, creating a new canvas for each page
         for (var i = start_page; i <= end_page; i++) {
@@ -106,16 +106,29 @@ function renderPdfHorizontal(container, pdf_url, start, end) {
             container.appendChild(canvas);
             switch(i) {
                 case start_page:
-                    renderPdfClip(canvas, pdf_url, i, start_y, 1);
+                    renderPdfClip(canvas, element.source, i, 0, start_y, 1, 1);
                     break;
                 case end_page:
-                    renderPdfClip(canvas, pdf_url, i, 0, end_y);
+                    renderPdfClip(canvas, element.source, i, 0, 0, 1, end_y);
                     break;
                 default:
-                    renderPdfClip(canvas, pdf_url, i, 0, 1);
+                    renderPdfClip(canvas, element.source, i, 0, 0, 1, 1);
             }
         }  
     }
+}
+
+function renderPdfRectangle(container, pdfRect) {
+    // Check for valid inputs
+    if ((pdfRect.startX>1)|(pdfRect.endX>1)|(pdfRect.startY>1)|(pdfRect.endY>1)|
+        (pdfRect.startX<0)|(pdfRect.endX<0)|(pdfRect.startY<0)|(pdfRect.endY<0)) {
+        console.log("Could not render pdfRectangle ('"+pdfRect.source+'). These can not extend outside of page boundaries. So startX, startY, endX, and endY parameters must to between 0 and 1.');
+        return;
+    }
+
+    var canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+    renderPdfClip(canvas, pdfRect.source, pdfRect.page, pdfRect.startX, pdfRect.startY, pdfRect.endX, pdfRect.endY);
 }
 
 /*
@@ -128,7 +141,7 @@ These are used as fractions of the whole page (.
 This is done by modifying the height and width of the canvas element that pdf.js renders to. It 
 then using canvas.translate to move to the correct section of the page.
 */
-function renderPdfClip(canvas, pdf_url, page_no, y1, y2) {
+function renderPdfClip(canvas, pdf_url, page_no, startX, startY, endX, endY) {
     // NOTE:
     // Using a PDF from another server will likely *NOT* work. Because of browser
     // security restrictions, we have to use a file server with special headers
@@ -151,54 +164,10 @@ function renderPdfClip(canvas, pdf_url, page_no, y1, y2) {
         var context = canvas.getContext('2d');
 
         // Displacement and clipping of pages
-        canvas.height = viewport.height*(y2-y1);
-        canvas.width = viewport.width;
-        context.translate(0,-(viewport.height*y1));
-
-        // Render PDF page into canvas context
-        page.render({canvasContext: context, viewport: viewport});
-      });
-    });
-
-}
-
-function renderPdfRectangle(container, pdfRect) {
-    // Check for valid inputs
-    if ((pdfRect.startX>1)|(pdfRect.endX>1)|(pdfRect.startY>1)|(pdfRect.endY>1)|
-        (pdfRect.startX<0)|(pdfRect.endX<0)|(pdfRect.startY<0)|(pdfRect.endY<0)) {
-        console.log("Could not render pdfRectangle ('"+pdfRect.source+'). These can not extend outside of page boundaries. So startX, startY, endX, and endY parameters must to between 0 and 1.');
-        return;
-    }
-
-    // NOTE:
-    // Using a PDF from another server will likely *NOT* work. Because of browser
-    // security restrictions, we have to use a file server with special headers
-    // (CORS) - most servers don't support cross-origin browser requests.
-    // ----> why we're making a locally run web application.
-
-    // Disable workers to avoid yet another cross-origin issue (workers need the URL of
-    // the script to be loaded, and dynamically loading a cross-origin script does
-    // not work)
-    PDFJS.disableWorker = true;
-
-    // Asynchronous download PDF as an ArrayBuffer
-    PDFJS.getDocument(pdfRect.source).then(function getClipViewer(pdf) {
-      // Fetch the first page
-      pdf.getPage(pdfRect.page).then(function getPageClipViewer(page) {
-        var scale = 1.5;
-        var viewport = page.getViewport(scale);
-
-        // Prepare canvas using PDF page dimensions
-        var canvas = document.createElement('canvas');
-        canvas.id = container.id + "_page_"+pdfRect.page; 
-        container.appendChild(canvas);
-        var context = canvas.getContext('2d');
-
         // Displacement and clipping of pages
-        canvas.height = viewport.height*(pdfRect.endY-pdfRect.startY);
-        canvas.width = viewport.width*(pdfRect.endX-pdfRect.startX);
-        context.translate(-(viewport.width*pdfRect.startX),-(viewport.height*pdfRect.startY));
-
+        canvas.height = viewport.height*(endY-startY);
+        canvas.width = viewport.width*(endX-startX);
+        context.translate(-(viewport.width*startX),-(viewport.height*startY));
 
         // Render PDF page into canvas context
         page.render({canvasContext: context, viewport: viewport});
