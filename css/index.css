@@ -32,7 +32,24 @@ body {
     background-position: right top;
     background-repeat: no-repeat;
     border-top: 1px solid #d4d4d4; border-bottom: 1px solid #d4d4d4; 
-    overflow:hidden;
+    overflow: hidden;
+}
+
+.comment {
+    text-align: left;
+    margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	padding: 2%;
+	width: 86%;
+	background-color: #FFFFE4;
+	border: 1px solid #d4d4d4;
+}
+
+.comment .author {
+	font-weight: bold;
+	border-bottom: 1px solid #d4d4d4;
 }
 
 .buttons {

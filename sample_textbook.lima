@@ -7,7 +7,12 @@
           "source": "https://bitcoin.org/bitcoin.pdf",
           "startY": 2.2,
           "endY": 4.4,
-          "comments": []
+          "comments": [
+            {
+              "author": "dan",
+              "text": "This loads so fast on my computer."
+            }
+          ]
       },
       {
           "type": "wikipedia",
@@ -18,7 +23,16 @@
       {
           "type": "image",
           "source": "http://www.sorting-algorithms.com/animation/40/random-initial-order/heap-sort.gif",
-          "comments": []
+          "comments": [
+            {
+              "author": "sasha",
+              "text": "Wow. That's so cool."
+            },
+            {
+              "author": "dan",
+              "text": "You know it."
+            }
+          ]
       },
       {
           "type": "pdfRectangle",

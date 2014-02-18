@@ -30,7 +30,30 @@ function renderTextbook(container, textbook) {
     author.className += "author";
     header.appendChild(author);
 
-    $.each(textbook.elements, function( index, element ) { renderElement(container, element); });
+    $.each(textbook.elements, function( index, element ) { 
+        renderElement(container, element); 
+        renderComments(container, element); 
+    });
+}
+
+function renderComments(container, element) {
+    if (typeof element.comments !== 'undefined') { 
+        $.each(element.comments, function( index, comment ) { 
+            var comment_container = document.createElement('div');
+            comment_container.className += "comment viewer";
+
+            var author = document.createElement('span');
+            author.textContent = comment.author;
+            author.className += "author";
+            comment_container.appendChild(author);
+
+            var text = document.createElement('p');
+            text.textContent = comment.text;
+            comment_container.appendChild(text);
+
+            container.appendChild(comment_container);
+        });
+    }
 }
 
 function renderElement(container, element) {
@@ -89,13 +112,6 @@ function renderWikipediaElement(container, element) {
         container.innerHTML = html.substring(element.start,element.end);
         $('.wikipedia a').contents().unwrap();
         $('.wikipedia img').attr('src', function(index, src) { return 'http:' + src; });
-    });
-}
-
-function renderTextElement(container, element) {
-    var source = "http://en.wikipedia.org/w/api.php?action=parse&page="+element.page+"&format=json";
-    $.getJSON( source, function(page) {
-        container.innerHTML = page.parse.text['*'];
     });
 }
 
