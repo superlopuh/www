@@ -145,3 +145,13 @@ color: #C09853;
 .bs-callout-info h4 {
 color: #3A87AD;
 }
+
+#add-wrapper {
+  width: 800px;
+  min-height: 150px;
+  display: inline-block;
+}
+
+form {
+  margin: 8px;
+}

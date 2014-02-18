@@ -1,7 +1,7 @@
 
 // The textbook is stored in brackets.currentTextbook
 
-function newTextbook() {
+function createNewTextbook() {
 	var newTextbook 		= {};
 	newTextbook.title 		= "Title";
 	newTextbook.author 		= "Author";
