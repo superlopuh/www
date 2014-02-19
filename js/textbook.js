@@ -37,7 +37,7 @@ function elementIsWellDefined(element) {
 	else if (!(element.comments.isArray)) {
 		return false;
 	}
-	
+
 	else {
 		// Check that comments are well defined
 		var numberOfComments = element.comments.length;
@@ -166,7 +166,7 @@ function previousPDFs() {
 		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" ||
 			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
 			var tag = "PDF " + el;
-			pdfLinks.append({
+			pdfLinks.push({
 				tag: brackets.currentTextbook.elements[el].source
 			})
 		}
