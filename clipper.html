@@ -4,38 +4,42 @@
 	<title>
 		Group Lima: Technical Textbook of the future
 	</title>
-	<link rel="stylesheet" href="clipper.css" />
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/clipper.css" />
 	<meta charset="utf-8" />
 </head>
 <body>
 	<div id="clipper-wrapper">
-
-	  <div id="clipper-viewer">
-
-	    <div id="viewer-canvas-container">
-	      <div id="viewer-overlay"></div>
-	      <canvas id="clipper-viewer-canvas" data-page="1"></canvas>
-	    </div>
-
-	    <div id="clipper-viewer-controls">
-	      <a class="button left" id="previous-page">&laquo; Previous page</a>
-	      <a class="button right" id="next-page">Next page &raquo;</a>
-	    </div>
+	  <div id="clipper-topbar">
+	    <input type="text" id="source-url"
+	      placeholder="URL..." />
+	    <input type="submit" id="source-load" 
+	      class="btn btn-primary" value="Load" />
 	  </div>
-
-	  <div id="clipper-controls">
-	    <div id="loader">
-	      <input type="text" id="source-url" placeholder="PDF source..." />
-	      <a class="button right" id="source-load">Load PDF</a>
-	      <div class="clearfix"></div>
-	    </div>
-
-	    <div id="source-list">
-	      <ul>
+	  <div id="clipper-main" class="empty">
+	    <div id="clipper-recently-used">
+	      <h1>Recently used...</h1>
+	      <ul id="clipper-recently-used-list">
+		<li><a href="http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf">http://www.cl.cam.ac.uk/teaching/1314/AlgorithII/2013-stajano-algs2-students-handout.pdf</a></li>
 	      </ul>
 	    </div>
 
-	    <a class="button right" id="save">Save textbook</a>
+	    <div id="clipper-viewer">
+	      <a class="btn btn-primary" id="previous-page">
+		&laquo; Previous page
+	      </a>
+
+	      <a class="btn btn-primary" id="next-page">
+		Next page &raquo;
+	      </a>
+
+	      <div id="clipper-overlay"></div>
+
+	      <canvas id="clipper-canvas"></canvas>
+	    </div>
 	  </div>
 	</div>
 

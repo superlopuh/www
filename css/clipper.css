@@ -1,0 +1,71 @@
+body, html {
+  height: 100%;
+}
+
+#clipper-wrapper {
+  position: absolute;
+  border: 1px solid black;
+  height: 75%;
+  width: 75%;
+  margin-top: 25px;
+  margin-left: 100px;
+  overflow: hidden;
+}
+
+#clipper-topbar {
+  width: 100%;
+}
+
+#clipper-topbar input {
+  box-sizing: border-box;
+  padding: 5px;
+  height: 42px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+#clipper-topbar input[type=text] {
+  width: 80%;
+}
+
+#clipper-topbar input[type=submit] {
+  width: 19%;
+}
+
+#clipper-main {
+  position: absolute;
+  top: 42px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#clipper-main:not(.empty) #clipper-recently-used {
+  display: none;
+}
+
+#clipper-viewer {
+  margin-top: 20px;
+  display: none;
+  height: 100%;
+}
+
+#clipper-canvas {
+  height: 90%;
+  width: 90%;
+  margin: 5% auto;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#clipper-overlay {
+  border: 1px solid blue;
+  background: rgba(0,0,255,0.2);
+  position: absolute;
+  top: 10000px;
+  left: 10000px;
+}
+
+#clipper-main:not(.empty) #clipper-viewer {
+  display: block;
+}
