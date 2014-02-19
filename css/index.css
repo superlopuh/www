@@ -25,17 +25,21 @@ body {
     max-width: 90%;
 }
 
-.wikipedia {
+.wikipedia, .text {
     text-align: left;
     margin-left: 5%; margin-right: 5%;
     margin-top: 2em; margin-bottom: 2em;
     padding: 5%;
     width: 80%;
+    border-top: 1px solid #d4d4d4; border-bottom: 1px solid #d4d4d4;
+    overflow: hidden;
+}
+
+.wikipedia {
+    text-align: left;
     background-image: url("../img/WikiElementBG.png");
     background-position: right top;
     background-repeat: no-repeat;
-    border-top: 1px solid #d4d4d4; border-bottom: 1px solid #d4d4d4;
-    overflow: hidden;
 }
 
 .comment {

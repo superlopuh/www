@@ -83,6 +83,10 @@ function renderElement(container, element) {
                 element_container.className += " image";
                 renderImageElement(element_container, element);
                 break;
+            case 'text':
+                element_container.className += " text";
+                renderTextElement(element_container, element);
+                break;
             default:
                 break;
         }
@@ -113,6 +117,10 @@ function renderWikipediaElement(container, element) {
         $('.wikipedia a').contents().unwrap();
         $('.wikipedia img').attr('src', function(index, src) { return 'http:' + src; });
     });
+}
+
+function renderTextElement(container, element) {
+    container.innerHTML = element.text;
 }
 
 function renderPdfHorizontal(container, element) {

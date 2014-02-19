@@ -3,6 +3,10 @@
   "title": "My book on Algorithms",
   "elements": [
       {
+          "type": "text", 
+          "text": "You can now add plain text to the document if you'd like. :)"
+      },
+      {
           "type": "pdfHorizontal",
           "source": "https://bitcoin.org/bitcoin.pdf",
           "startY": 2.2,
@@ -10,7 +14,7 @@
           "comments": [
             {
               "author": "dan",
-              "text": "This loads so fast on my computer."
+              "text": "I still can't figure out quite how this system works...."
             }
           ]
       },
