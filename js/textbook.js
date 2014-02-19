@@ -37,10 +37,7 @@ function elementIsWellDefined(element) {
 	else if (!(element.comments.isArray)) {
 		return false;
 	}
-	// Check that element has a source that is a string
-	else if (typeof(element.source) != "string") {
-		return false;
-	}
+	
 	else {
 		// Check that comments are well defined
 		var numberOfComments = element.comments.length;
@@ -50,6 +47,25 @@ function elementIsWellDefined(element) {
 		// Check that rest is well defined for the different types of elements
 		switch(element.type) {
 			case 'pdfRectangle':
+				// Check that element has a source that is a string
+				if (typeof(element.source) != "string") {
+					return false;
+				}
+				// Check that element has all coordinates
+				else if (typeof(element.startX) != "number" ||
+						 typeof(element.startY) != "number" ||
+						 typeof(element.endX) != "number" ||
+						 typeof(element.endY) != "number") {
+					return false;
+				}
+				// Check that end is after start
+				else if (element.startX >= element.endX ||
+						 element.startY >= element.endY) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case 'pdfHorizontal':
 			case 'youtube':
 			case 'text' :
