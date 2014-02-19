@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>
-		Book Jokey – Viewer
+		BookJockey
 	</title>
   <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -17,7 +17,7 @@
 			<div class = "left">
   		</div>
   		<div class = "right">
-        <button id="new-button" type="button" onclick="javascript:newTextbook();" class="btn btn-primary">New</button>
+        <button id="new-button" type="button" onclick="javascript:renderNewTextbook();" class="btn btn-primary">New</button>
         <button id="open-button" type="button" onclick="javascript:openTextbook();" class="btn btn-primary">Open</button>
         <button id="edit-button" type="button" class="btn btn-primary">Edit</button>
         <button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-success">Save</button>
@@ -56,36 +56,97 @@
       <div class="tab-pane active" id="add-pdf">
         <form class="form-horizontal" role="form">
           <div class="form-group">
-            <label for="inputPdfUrl" class="col-sm-2 control-label">URL of PDF</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputPdfUrl" placeholder="URL of PDF">
+            <label for="inputPdfUrl" class="col-sm-3 control-label">URL of PDF</label>
+            <div class="col-sm-9">
+              <input type="url" class="form-control" id="inputPdfUrl" placeholder="URL of PDF">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="pdfStart">PDF start position</label>
+            <div class="col-sm-3">
+              <input class="form-control" id="pdfStart" placeholder="PDF start position">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="pdfEnd">PDF end position</label>
+            <div class="col-sm-3">
+              <input class="form-control" id="pdfEnd" placeholder="PDF end position">
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-success pull-right">Add</button>
+              <button type="button" onclick="javascript:putPdf()" class="btn btn-success pull-right">Add</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <p>Or pick from previously used PDFs:</p>
+              <ol id="pdfList">
+              </ol>
             </div>
           </div>
         </form>
       </div>
-      <div class="tab-pane" id="add-youtube">...</div>
+      <div class="tab-pane" id="add-youtube">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputYouTubeUrl" class="col-sm-2 control-label">YouTube URL</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="inputYouTubeUrl" placeholder="URL of YouTube video">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" onclick="javascript:putYouTube()" class="btn btn-success pull-right">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
       <div class="tab-pane" id="add-image">
         <form class="form-horizontal" role="form">
           <div class="form-group">
             <label for="inputImageUrl" class="col-sm-2 control-label">URL of Image</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputImageUrl" placeholder="URL of Image">
+              <input type="url" class="form-control" id="inputImageUrl" placeholder="URL of Image">
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-success pull-right">Add</button>
+              <button type="button" onclick="javascript:putImage()" class="btn btn-success pull-right">Add</button>
             </div>
           </div>
         </form>
       </div>
-      <div class="tab-pane" id="add-wiki">...</div>
-      <div class="tab-pane" id="add-text">...</div>
+      <div class="tab-pane" id="add-wiki">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputWikipediaUrl" class="col-sm-2 control-label">URL of Wikipedia</label>
+            <div class="col-sm-10">
+              <input type="url" class="form-control" id="inputWikipediaUrl" placeholder="Wikipedia URL">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" onclick="javascript:putWikipedia()" class="btn btn-success pull-right">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="tab-pane" id="add-text">
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label for="inputText" class="col-sm-2 control-label">Text</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="inputText" placeholder="Text" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="button" onclick="javascript:putText()" class="btn btn-success pull-right">Add</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -103,25 +164,12 @@
 			}
     });
 
-    function addElement() {
-    	var element = new Object();
-    	element.source =  window.prompt("url?","http://www.cl.cam.ac.uk/teaching/1314/FJava/workbook4.pdf");
-    	element.startY =  window.prompt("start at?","");
-    	element.endY = window.prompt("end at?","");
-
-      renderPdfHorizontal($('<div></div>').insertBefore('#add-buttons').get(0), element);
-    }
-
     $( document ).ready(function() {
 
       $('#add-wrapper').hide();
 
-      $('#add-pdf').click(function() {
-       addElement();
-      });
-
       $('#edit-button').click(function() {
-      	$('#add-buttons').show();
+      	$('#add-wrapper').show();
       })
     });
 
@@ -130,8 +178,14 @@
   			$("#textbook").empty();
       	$.getJSON("file:///" + fp, function(textbook) {
           brackets.currentTextbook = textbook;
+          $("#pdfList").empty();
+          $.each(previousPDFs(), function(i, val){
+            $("#pdfList").append("<li>" + val.tag + "</li>");
+          });
           renderTextbook(document.getElementById('textbook'),textbook);
 			  });
+
+
   		});
     }
 
@@ -141,31 +195,42 @@
   		});
   	}
 
-    function newTextbook() {
+    function renderNewTextbook() {
+      brackets.currentTextbook = newTextbook();
       $('#textbook').addClass("textbook_container")
           .html('<div class="bs-callout bs-callout-info"><h4>Your textbook is currently empty.</h4> <p>Click a button below to add content.</p>');
       $('#add-wrapper').show();
       brackets.currentTextbook = createNewTextbook();
     }
 
-    function addPdf() {
-
+    function putPdf() {
+      addPDFHorizontalClip($("#inputPdfUrl").val(), $("#pdfStart").val(), $("#pdfEnd").val())
+      $("#textbook").empty();
+      renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }
 
-    function addYoutube() {
-
+    function putYouTube() {
+      addYouTubeVid($("#inputYoutubeUrl").val(), 0);
+      $("#textbook").empty();
+      renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }
 
-    function addImage() {
-
+    function putImage() {
+      addImage($("#inputImageUrl").val());
+      $("#textbook").empty();
+      renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }
 
-    function addWiki() {
-
+    function putWikipedia() {
+      addWiki($("#inputWikipediaUrl").val());
+      $("#textbook").empty();
+      renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }
 
-    function addText() {
-
+    function putText() {
+      addText($("#inputText").val());
+      $("#textbook").empty();
+      renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }
   </script>
 </body>

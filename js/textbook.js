@@ -58,7 +58,7 @@ function elementIsWellDefined(element) {
 			default:
 				return false;
 				break;
-		}	
+		}
 	}
 }
 
@@ -97,7 +97,7 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	newElement.endX 	= endX;
 	newElement.endY 	= endY;
 	newElement.comments = [];
-	brackets.currentTextbook.elements.add(newElement);
+	brackets.currentTextbook.elements.push(newElement);
 }
 
 function addPDFHorizontalClip(source,startY,endY) {
@@ -107,7 +107,7 @@ function addPDFHorizontalClip(source,startY,endY) {
 	newElement.startY 	= startY;
 	newElement.endY 	= endY;
 	newElement.comments = [];
-	brackets.currentTextbook.elements.add(newElement);
+	brackets.currentTextbook.elements.push(newElement);
 }
 
 function addYouTubeVid(source,startTime) {
@@ -116,7 +116,7 @@ function addYouTubeVid(source,startTime) {
 	newElement.source 	 = source;
 	newElement.startTime = startTime;
 	newElement.comments  = [];
-	brackets.currentTextbook.elements.add(newElement);
+	brackets.currentTextbook.elements.push(newElement);
 }
 
 function addText(text) {
@@ -124,7 +124,7 @@ function addText(text) {
 	newElement.type 	= "text";
 	newElement.text 	= text;
 	newElement.comments = [];
-	brackets.currentTextbook.elements.add(newElement);
+	brackets.currentTextbook.elements.push(newElement);
 }
 
 function addWiki(source) {
@@ -132,7 +132,7 @@ function addWiki(source) {
 	newElement.type 	= "wikipedia";
 	newElement.source 	= source;
 	newElement.comments = [];
-	brackets.currentTextbook.elements.add(newElement);
+	brackets.currentTextbook.elements.push(newElement);
 }
 
 function addImage(source) {
@@ -140,14 +140,14 @@ function addImage(source) {
 	newElement.type 	= "image";
 	newElement.source 	= source;
 	newElement.comments = [];
-	brackets.currentTextbook.elements.add(newElement);
+	brackets.currentTextbook.elements.push(newElement);
 }
 
 function previousPDFs() {
 	var pdfLinks = [];
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	for (var el = 0; el < numberOfElements; el++) {
-		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" || 
+		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" ||
 			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
 			var tag = "PDF " + el;
 			pdfLinks.append({
