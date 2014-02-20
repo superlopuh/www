@@ -19,7 +19,7 @@
   		<div class = "right">
         <button id="new-button" type="button" onclick="javascript:renderNewTextbook();" class="btn btn-primary">New</button>
         <button id="open-button" type="button" onclick="javascript:openTextbook();" class="btn btn-primary">Open</button>
-        <button id="edit-button" type="button" class="btn btn-primary" data-toggleState="false">Edit</button>
+        <button id="edit-button" type="button" class="btn btn-primary disabled">Edit</button>
         <button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-success">Save</button>
 		  </div>
 		</div>
@@ -175,9 +175,15 @@
         state = $(this).data('toggleState');
         if (state) {
           $(this).html("View");
+
+          // $(<input type="url" class="form-control" id="inputPdfUrl" placeholder="URL of PDF">
+          $('#bookTitle').attr("contenteditable", true);
+          $('#bookAuthor').attr("contenteditable", true);
           $('#add-wrapper').show();
         } else {
           $(this).html("Edit");
+          $('#bookTitle').attr("contenteditable", false);
+          $('#bookAuthor').attr("contenteditable", false);
           $('#add-wrapper').hide();
         }
         $(this).data('toggleState', !state);
@@ -185,6 +191,7 @@
     });
 
 		function openTextbook() {
+      $('#edit-button').removeClass("disabled");
   		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
   			$("#textbook").empty();
       	$.getJSON("file:///" + fp, function(textbook) {
@@ -201,12 +208,15 @@
     }
 
   	function saveTextbook() {
+      modifyTitle($('#bookTitle').html());
+      modifyAuthor($('#bookAuthor').html());
     	brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
   			brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
   		});
   	}
 
     function renderNewTextbook() {
+      $('#edit-button').removeClass("disabled");
       brackets.currentTextbook = createNewTextbook();
       $('#textbook').addClass("textbook_container")
           .html('<div class="bs-callout bs-callout-info"><h4>Your textbook is currently empty.</h4> <p>Click a button below to add content.</p>');
