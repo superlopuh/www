@@ -151,11 +151,83 @@ color: #3A87AD;
 }
 
 #add-wrapper {
-  width: 800px;
+  position: absolute;
+  width: 80%;
+  left: 10%;
   min-height: 150px;
   display: inline-block;
 }
 
 form {
   margin: 8px;
+}
+
+#clipper-wrapper {
+  position: absolute;
+  min-height: 800px;
+  width: 90%;
+  margin-top: 25px;
+  margin-left: 5%;
+  overflow: hidden;
+}
+
+#clipper-topbar {
+  width: 100%;
+}
+
+#clipper-topbar input {
+  box-sizing: border-box;
+  padding: 5px;
+  height: 42px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+#clipper-topbar input[type=text] {
+  width: 80%;
+}
+
+#clipper-topbar input[type=submit] {
+  width: 19%;
+}
+
+#clipper-main {
+  position: absolute;
+  top: 42px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+#add-pdf:not(.empty) #clipper-recently-used {
+  display: none;
+}
+
+#clipper-viewer {
+  display: none;
+  height: 100%;
+}
+
+#clipper-control {
+  margin-top: 20px;
+  display: none;
+}
+
+#clipper-canvas {
+  height: 90%;
+  margin: 5% auto;
+  background-color: white;
+  border: 1px solid black;
+}
+
+#clipper-overlay {
+  border: 1px solid blue;
+  background: rgba(0,0,255,0.2);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+}
+
+#add-pdf:not(.empty) #clipper-viewer, #add-pdf:not(.empty) #clipper-control {
+  display: block;
 }

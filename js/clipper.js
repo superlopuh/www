@@ -25,28 +25,43 @@ function loadSource(source) {
     .attr("data-page", 1)
     .attr('data-source', source);
 
-  $('#source-url').val(source);
+  $('#inputPDFUrl').val(source);
+  $('#add-pdf').removeClass('empty');
 
-  $('#clipper-main').removeClass('empty');
-
-  renderPdfClip("#clipper-canvas", source, 1, 0, 1);
+  renderPdfClip(document.getElementById("clipper-canvas"), source, 1, 0, 0, 1, 1);
 }
 
-$('#source-load').click(function(e) {
+$('#inputPDFUrl').change(function(e) {
   e.preventDefault();
-  loadSource($('#source-url').val());
+
+  if ($("#inputPDFUrl").empty()) {
+    removeSelection();
+
+    $("#clipper-recently-used-list").empty();
+    $.each(previousPDFs(), function(i, val){
+      $("#clipper-recently-used-list").append("<li><a href="+val.tag+">" + val.tag + "</a></li>");
+    });
+
+    $('#add-pdf').addClass('empty');
+
+    return;
+  }
+
+  loadSource($('#inputPDFUrl').val());
 });
 
-$('#clipper-recently-used-list a').click(function(e) {
+$('#clipper-recently-used-list').click('a', function(e) {
   e.preventDefault();
-  loadSource($(this).attr('href'));
+  console.log(e.toElement.href);
+  loadSource(e.toElement.href);
 });
 
 $('#next-page').click(function(e) {
   var page = Number($("#clipper-canvas").attr("data-page"))+1;
   var source = $("#clipper-canvas").attr("data-source");
   $("#clipper-canvas").attr("data-page", page);
-  renderPdfClip("#clipper-canvas", source, page, 0, 1);
+  renderPdfClip(document.getElementById("clipper-canvas"), source, page, 0, 0, 1, 1);
+  removeSelection();
 });
 
 $('#previous-page').click(function(e) {
@@ -54,7 +69,8 @@ $('#previous-page').click(function(e) {
   var source = $("#clipper-canvas").attr("data-source");
   if (page < 1) page = 1;
   $("#clipper-canvas").attr("data-page", page);
-  renderPdfClip("#clipper-canvas", source, page, 0, 1);
+  renderPdfClip(document.getElementById("clipper-canvas"), source, page, 0, 0, 1, 1);
+  removeSelection();
 });
 
 $('#clipper-canvas').mousedown(function(e) {
@@ -66,12 +82,13 @@ $('#clipper-canvas').mousedown(function(e) {
 
   $(this).attr('data-startx', startX)
     .attr('data-starty', startY);
+
+  $('#add-clip').removeClass('disabled');
 });
 
 $('#clipper-canvas, #clipper-overlay').mouseup(function(e) {
   e.preventDefault();
   $('#clipper-canvas').attr('data-selecting', 'false');
-  addClip();
 });
 
 $('#clipper-canvas').mousemove(function(e) {
@@ -118,13 +135,33 @@ function addClip() {
   
   var source = $canvas.attr('data-source');
   var page = Number($canvas.attr('data-page'));
-  var startX = page+Number($canvas.attr('data-startx'));
-  var startY = page+Number($canvas.attr('data-starty'));
-  var endX = page+Number($canvas.attr('data-endx'));
-  var endY = page+Number($canvas.attr('data-endy'));
+  var startX = Number($canvas.attr('data-startx'));
+  var startY = Number($canvas.attr('data-starty'));
+  var endX = Number($canvas.attr('data-endx'));
+  var endY = Number($canvas.attr('data-endy'));
 
   if (startX > endX) { var t = startX; startX = endX; endX = t; }
   if (startY > endY) { var t = startY; startY = endY; endY = t; }
 
-  console.log("PDF: "+source+" ("+startX+","+startY+") -> ("+endX+","+endY+")");
+  addPDFRectangleClip(source, page, startX, startY, endX, endY);
+  $("#textbook").empty();
+  renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
+}
+
+$('#add-clip').click(function(e) {
+  e.preventDefault();
+
+  addClip();
+  removeSelection();
+});
+
+function removeSelection() {
+  var $canvas = $('#clipper-canvas');
+  $canvas.attr('data-startY', 0)
+    .attr('data-endY', 0)
+    .attr('data-startX', 0)
+    .attr('data-endX', 0);
+  fixOverlay();
+
+  $('#add-clip').addClass('disabled');
 }

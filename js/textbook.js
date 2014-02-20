@@ -108,6 +108,20 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	var newElement 		= {};
 	newElement.type 	= "pdfRectangle";
 	newElement.source 	= source;
+	newElement.page		= Math.floor(startX);
+	newElement.startX 	= startX;
+	newElement.startY 	= startY;
+	newElement.endX 	= endX;
+	newElement.endY 	= endY;
+	newElement.comments = [];
+	brackets.currentTextbook.elements.push(newElement);
+}
+
+function addPDFRectangleClip(source,page,startX,startY,endX,endY) {
+	var newElement 		= {};
+	newElement.type 	= "pdfRectangle";
+	newElement.source 	= source;
+	newElement.page		= page;
 	newElement.startX 	= startX;
 	newElement.startY 	= startY;
 	newElement.endX 	= endX;
