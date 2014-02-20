@@ -23,11 +23,13 @@ function renderTextbook(container, textbook) {
 
     var title = document.createElement('h1');
     title.textContent = textbook.title;
+    title.id = "bookTitle"
     header.appendChild(title);
 
     var author = document.createElement('span');
     author.textContent = 'By '+textbook.author;
     author.className += "author";
+    author.id = "bookAuthor";
     header.appendChild(author);
 
     $.each(textbook.elements, function( index, element ) { 

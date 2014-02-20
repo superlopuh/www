@@ -172,9 +172,13 @@
         state = $(this).data('toggleState');
         if (state) {
           $(this).html("View");
+          $('#bookTitle').attr("contenteditable", true);
+          $('#bookAuthor').attr("contenteditable", true);
           $('#add-wrapper').show();
         } else {
           $(this).html("Edit");
+          $('#bookTitle').attr("contenteditable", false);
+          $('#bookAuthor').attr("contenteditable", false);
           $('#add-wrapper').hide();
         }
         $(this).data('toggleState', !state);
@@ -198,6 +202,8 @@
     }
 
   	function saveTextbook() {
+      modifyTitle($('#bookTitle').html());
+      modifyAuthor($('#bookAuthor').html());
     	brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
   			brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
   		});
