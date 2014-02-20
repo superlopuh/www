@@ -169,7 +169,15 @@
       $('#add-wrapper').hide();
 
       $('#edit-button').click(function() {
-      	$('#add-wrapper').show();
+        state = $(this).data('toggleState');
+        if (state) {
+          $(this).html("View");
+          $('#add-wrapper').show();
+        } else {
+          $(this).html("Edit");
+          $('#add-wrapper').hide();
+        }
+        $(this).data('toggleState', !state);
       })
     });
 
