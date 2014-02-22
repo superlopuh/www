@@ -231,7 +231,18 @@
     }
 
     function putYouTube() {
-      addYouTubeVid($("#inputYoutubeUrl").val(), 0);
+      var url = $("#inputYouTubeUrl").val();
+      //Extract ID
+      var id = "";
+      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      if (match&&match[2].length==11){
+          id = match[2];
+      }else{
+          console.log("Could not process given youtube url");
+      }
+      //Add, Render
+      addYouTubeVid(id, 0);
       $("#textbook").empty();
       renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }
