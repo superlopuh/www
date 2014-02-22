@@ -325,3 +325,28 @@ function noCommentTextbook() {
 	});
 	return virginTextbook;
 }
+
+function describeTextbook() {
+	var textbookString = brackets.currentTextbook.name;
+	textbookString += " by " + brackets.currentTextbook.author + "\n";
+	var numberOfElements = brackets.currentTextbook.elements.length;
+	for (int i = 0; i < length; i++) {
+		textbookString += "\n" + i + ": ";
+		switch(brackets.currentTextbook.elements[i].type) {
+			case 'pdfRectangle':
+				textbookString += "Rectangle from " + brackets.currentTextbook.elements[i].source;
+			case 'pdfHorizontal':
+				textbookString += "Horizontal clip from  " + brackets.currentTextbook.elements[i].source;
+			case 'youtube':
+				textbookString += "YouTube clip from  " + brackets.currentTextbook.elements[i].source;
+			case 'text' :
+				textbookString += "Some text";
+			case 'wikipedia':
+				textbookString += "Wikipedia clip from  " + brackets.currentTextbook.elements[i].source;
+			case 'image':
+				textbookString += "Image from  " + brackets.currentTextbook.elements[i].source;
+			case default:
+				textbookString += "Undefined type";
+		}
+	} 
+}
