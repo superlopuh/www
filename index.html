@@ -97,6 +97,18 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="ytStart" class="col-sm-2 control-label">Start Time (seconds)</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="ytStart" placeholder="leave blank for full video">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="ytEnd" class="col-sm-2 control-label">End Time (seconds)</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="ytEnd" placeholder="leave blank for full video">
+            </div>
+          </div>
+          <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <button type="button" onclick="javascript:putYouTube()" class="btn btn-success pull-right">Add</button>
             </div>
@@ -241,8 +253,14 @@
       }else{
           console.log("Could not process given youtube url");
       }
-      //Add, Render
-      addYouTubeVid(id, 0);
+      //Get start and end times if possible
+      var start = $("#ytStart").val();
+      var end = $("#ytEnd").val();
+      if ((start == null)||(end == null)) {
+        addYouTubeVid(id);
+      } else {
+        addYouTubeVid(id, start, end);
+      }
       $("#textbook").empty();
       renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
     }

@@ -140,11 +140,19 @@ function addPDFHorizontalClip(source,startY,endY) {
 	brackets.currentTextbook.elements.push(newElement);
 }
 
-function addYouTubeVid(source,startTime) {
+function addYouTubeVid(source) {
 	var newElement 		 = {};
 	newElement.type 	 = "youtube";
 	newElement.source 	 = source;
-	newElement.startTime = startTime;
+	newElement.comments  = [];
+	brackets.currentTextbook.elements.push(newElement);
+}
+function addYouTubeVid(source, start, end) {
+	var newElement 		 = {};
+	newElement.type 	 = "youtube";
+	newElement.source 	 = source;
+	newElement.start 	 = start;
+	newElement.end 		 = end;
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
 }
