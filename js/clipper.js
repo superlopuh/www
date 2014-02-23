@@ -144,8 +144,6 @@ function addClip() {
   if (startY > endY) { var t = startY; startY = endY; endY = t; }
 
   addPDFRectangleClip(source, page, startX, startY, endX, endY);
-  $("#textbook").empty();
-  renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
 }
 
 $('#add-clip').click(function(e) {

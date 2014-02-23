@@ -115,6 +115,7 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	newElement.endY 	= endY;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 
 function addPDFRectangleClip(source,page,startX,startY,endX,endY) {
@@ -128,6 +129,7 @@ function addPDFRectangleClip(source,page,startX,startY,endX,endY) {
 	newElement.endY 	= endY;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 
 function addPDFHorizontalClip(source,startY,endY) {
@@ -138,6 +140,7 @@ function addPDFHorizontalClip(source,startY,endY) {
 	newElement.endY 	= endY;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 
 function addYouTubeVid(source) {
@@ -146,6 +149,7 @@ function addYouTubeVid(source) {
 	newElement.source 	 = source;
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 function addYouTubeVid(source, start, end) {
 	var newElement 		 = {};
@@ -155,6 +159,7 @@ function addYouTubeVid(source, start, end) {
 	newElement.end 		 = end;
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 
 function addText(text) {
@@ -163,6 +168,7 @@ function addText(text) {
 	newElement.text 	= text;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 
 function addWiki(source) {
@@ -171,6 +177,7 @@ function addWiki(source) {
 	newElement.source 	= source;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
 }
 
 function addImage(source) {
@@ -179,6 +186,7 @@ function addImage(source) {
 	newElement.source 	= source;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	renderElement(brackets.textbookContainer, newElement);
 }
 
 function previousPDFs() {

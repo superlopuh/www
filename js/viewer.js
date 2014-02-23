@@ -11,7 +11,7 @@
 
     Requirements
     ------------
-    This file requires the jQuery library and pdf.js to be included in the page to function correctly.
+    This file requires the jQuery library, showdown.js and pdf.js to be included in the page to function correctly.
 */
 
 
