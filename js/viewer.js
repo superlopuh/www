@@ -14,6 +14,9 @@
     This file requires the jQuery library and pdf.js to be included in the page to function correctly.
 */
 
+
+var mdconverter = new Showdown.converter();
+
 /*Note the 'container' variable refers to an actual DOM element, not its ID*/
 function renderTextbook(container, textbook) {
     container.className += " textbook_container";
@@ -122,7 +125,7 @@ function renderWikipediaElement(container, element) {
 }
 
 function renderTextElement(container, element) {
-    container.innerHTML = element.text;
+    container.innerHTML = mdconverter.makeHtml(element.text);
 }
 
 function renderPdfHorizontal(container, element) {
