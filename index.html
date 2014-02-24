@@ -224,6 +224,9 @@
   	function saveTextbook() {
       modifyTitle($('#bookTitle').html());
       modifyAuthor($('#bookAuthor').html());
+	  var proposed_filename = $("#bookTitle").text();
+	  proposed_filename = proposed_filename.replace(/[\/:\*\?\"<>|]/g,"");
+	  proposed_filename = proposed_filename.replace(/\s+/g,"_");
     	brackets.fs.showSaveDialog("title2","","proposed_filename.lima", function(err,fp) {
   			brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
   		});
