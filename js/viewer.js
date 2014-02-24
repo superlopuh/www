@@ -30,10 +30,14 @@ function renderTextbook(container, textbook) {
     header.appendChild(title);
 
     var author = document.createElement('span');
-    author.textContent = 'By '+textbook.author;
-    author.className += "author";
+    var author_wrapper = document.createElement('span');
+    author_wrapper.textContent = 'By ';
+    author_wrapper.className += "author";
+
     author.id = "bookAuthor";
-    header.appendChild(author);
+    author.textContent = textbook.author;
+    author_wrapper.appendChild(author);
+    header.appendChild(author_wrapper);
 
     $.each(textbook.elements, function( index, element ) { 
         renderElement(container, element); 
