@@ -355,15 +355,12 @@ function getCommentAuthors() {
 	return authors;
 }
 
-var contains = function(needle) {
-	contains = function(needle) {
-		for (var i = 0; i < this.length; i++) {
-			if(this[i] === needle) {
-				return true;
-			}
+function contains(array, needle) {
+	for (var i = 0; i < array.length; i++) {
+		if(array[i] === needle) {
+			return true;
 		}
-	};
-	return contains.call(this, needle);
+	}
 }
 
 function noCommentTextbook() {
