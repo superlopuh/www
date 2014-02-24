@@ -57,24 +57,35 @@ $('#clipper-recently-used-list').click('a', function(e) {
 $('#next-page').click(function(e) {
   var page = Number($("#clipper-canvas").attr("data-page"))+1;
   var source = $("#clipper-canvas").attr("data-source");
-  $("#clipper-canvas").attr("data-page", page);
+  $(this).addClass("disabled");
+
   renderPdfClip(document.getElementById("clipper-canvas"), 
-    source, page, 0, 0, 1, 1);
+    source, page, 0, 0, 1, 1, function() {
+      $("#clipper-canvas").attr("data-page", page);
+      $("#next-page, #previous-page").removeClass("disabled");
+  });
+
   removeSelection();
 });
 
 $('#previous-page').click(function(e) {
   var page = Number($("#clipper-canvas").attr("data-page"))-1;
   var source = $("#clipper-canvas").attr("data-source");
-  if (page < 1) page = 1;
-  $("#clipper-canvas").attr("data-page", page);
-  renderPdfClip(document.getElementById("clipper-canvas"), source, page, 0, 0, 1, 1);
+  $(this).addClass("disabled");
+
+  renderPdfClip(document.getElementById("clipper-canvas"), 
+    source, page, 0, 0, 1, 1, function() {
+      $("#clipper-canvas").attr("data-page", page);
+      $("#next-page, #previous-page").removeClass("disabled");
+  });
+
   removeSelection();
 });
 
 $('#clipper-canvas').mousedown(function(e) {
   e.preventDefault();
   $(this).attr('data-selecting', 'true');
+  $(this).data('selected', false);
 
   var startX = e.offsetX/$(this).width();
   var startY = e.offsetY/$(this).height();
@@ -88,6 +99,10 @@ $('#clipper-canvas').mousedown(function(e) {
 $('#clipper-canvas, #clipper-overlay').mouseup(function(e) {
   e.preventDefault();
   $('#clipper-canvas').attr('data-selecting', 'false');
+
+  if (!$("#clipper-canvas").data("selected")) {
+    removeSelection();
+  }
 });
 
 $('#clipper-canvas').mousemove(function(e) {
@@ -95,6 +110,8 @@ $('#clipper-canvas').mousemove(function(e) {
   if ($(this).attr('data-selecting') !== 'true') {
     return;
   }
+
+  $(this).data('selected', true);
 
   var endX = e.offsetX/$(this).width();
   var endY = e.offsetY/$(this).height();
