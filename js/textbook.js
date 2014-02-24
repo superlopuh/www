@@ -254,6 +254,11 @@ function addImage(source) {
 
 function previousPDFs() {
 	var pdfLinks = [];
+
+	if (typeof brackets.currentTextbook === "undefined") {
+	  return [];
+	}
+
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	for (var el = 0; el < numberOfElements; el++) {
 		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" ||

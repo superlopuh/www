@@ -83,9 +83,9 @@ function renderElement(container, element, callback) {
         var element_container = document.createElement('div');
         element_container.className += "wrapper";
 		
-		var delete_button = document.createElement('span');
-		delete_button.className = "deleteButton";
-		element_container.appendChild(delete_button);
+	var delete_button = document.createElement('span');
+	delete_button.className = "deleteButton";
+	element_container.appendChild(delete_button);
 		
         container.appendChild(element_container);
         //Render if we know how

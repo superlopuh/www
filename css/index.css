@@ -164,6 +164,10 @@ color: #3A87AD;
   width: 80%;
   left: 10%;
   min-height: 150px;
+  display: none;
+}
+
+body.edit-mode #add-wrapper {
   display: inline-block;
 }
 
@@ -261,7 +265,12 @@ span.deleteButton {
     display: block;
     float: right;
     margin: 3px;
-	display: none;
+    display: none;
+    cursor: pointer;
+}
+
+body.edit-mode span.deleteButton {
+    display: block;
 }
 
 .youtube .deleteButton {
