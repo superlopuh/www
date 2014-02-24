@@ -347,7 +347,7 @@ function getCommentAuthors() {
 	for (var el = 0; el < numberOfElements; el++) {
 		numberOfComments = brackets.currentTextbook.elements[el].comments.length;
 		for (var comm = 0; comm < numberOfComments; comm++) {
-			if (!(authors.contains(brackets.currentTextbook.elements[el].comments[comm].author))) {
+			if (!(contains(authors,brackets.currentTextbook.elements[el].comments[comm].author))) {
 				authors.push(brackets.currentTextbook.elements[el].comments[comm].author);
 			}
 		}
