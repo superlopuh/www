@@ -309,7 +309,7 @@ function moveElement(oldPosition,newPosition) {
 			}
 			brackets.currentTextbook.elements = newElements;
 		}
-	};
+	}
 }
 
 // Comment functions below
