@@ -208,8 +208,16 @@ form {
   right: 0;
 }
 
+#clipper-recently-used {
+  min-height: 500px;
+}
+
 #add-pdf:not(.empty) #clipper-recently-used {
   display: none;
+}
+
+#add-pdf form button {
+  width: 100%;
 }
 
 #clipper-viewer {
@@ -243,6 +251,7 @@ form {
 
 #clipper-loading {
   display: none;
+  min-height: 500px;
 }
 
 span.deleteButton {

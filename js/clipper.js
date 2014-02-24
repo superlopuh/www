@@ -21,7 +21,6 @@ function generateListElement(id, source) {
 }
 
 function loadSource(source) {
-  console.log("Loading source "+source);
   $("#clipper-canvas")
     .attr("data-page", 1)
     .attr('data-source', source);
@@ -33,28 +32,17 @@ function loadSource(source) {
   $("#clipper-control, #clipper-viewer").css("display", "none");
   $("#clipper-loading").css("display", "block");
 
-  console.log("Loading");
   renderPdfClip(canvas, source, 1, 0, 0, 1, 1, function() {
-    console.log("Loaded");
     $("#clipper-control, #clipper-viewer").css("display", "block");
     $("#clipper-loading").css("display", "none");
   });
 }
 
-$('#inputPDFUrl').change(function(e) {
+$('#clipper-load').click(function(e) {
   e.preventDefault();
-  console.log("inputPDFUrl changed");
 
   if ($("#inputPDFUrl").val()==="") {
-    removeSelection();
-
-    $("#clipper-recently-used-list").empty();
-    $.each(previousPDFs(), function(i, val){
-      $("#clipper-recently-used-list").append("<li><a href="+val+">" + val + "</a></li>");
-    });
-
-    $('#add-pdf').addClass('empty');
-
+    clear();
     return;
   }
 
@@ -63,7 +51,6 @@ $('#inputPDFUrl').change(function(e) {
 
 $('#clipper-recently-used-list').click('a', function(e) {
   e.preventDefault();
-  console.log(e.toElement.href);
   loadSource(e.toElement.href);
 });
 
@@ -175,3 +162,26 @@ function removeSelection() {
 
   $('#add-clip').addClass('disabled');
 }
+
+function clear() {
+  removeSelection();
+  $("#inputPDFUrl").val("");
+
+  var pdfs = previousPDFs();
+  $("#clipper-recently-used-list").empty();
+  if (pdfs.length == 0) {
+    $("#clipper-recently-used-list").text("Empty");
+  } else {
+    $.each(pdfs, function(i, val){
+      $("#clipper-recently-used-list").append("<li><a href="+val+">" + val + "</a></li>");
+    });
+  }
+
+  $("#clipper-control, #clipper-viewer").css("display", "none");
+  $('#add-pdf').addClass('empty');
+}
+
+$("#clipper-clear").click(function(e) {
+  e.preventDefault();
+  clear();
+});
