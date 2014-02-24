@@ -241,6 +241,10 @@ form {
   display: block;
 }
 
+#clipper-loading {
+  display: none;
+}
+
 span.deleteButton {
     width: 16px;
     height: 16px;

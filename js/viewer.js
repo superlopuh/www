@@ -65,7 +65,7 @@ function renderComments(container, element) {
     }
 }
 
-function renderElement(container, element) {
+function renderElement(container, element, callback) {
         //Create element container
         var element_container = document.createElement('div');
         element_container.className += "wrapper";
@@ -79,12 +79,12 @@ function renderElement(container, element) {
         switch (element.type) {
             case 'pdfHorizontal': 
                 element_container.className += " pdfHorizontal";
-                renderPdfHorizontal(element_container, element);
+                renderPdfHorizontal(element_container, element, callback);
                 break;
             case 'pdfRectangle': 
                 element_container.className += " pdfRectangle";
-                renderPdfRectangle(element_container, element);
-                break;				
+                renderPdfRectangle(element_container, element, callback);
+                break;				
             case 'youtube':
                 element_container.className += " youtube";
                 renderYoutubeElement(element_container, element);
@@ -169,7 +169,7 @@ function renderPdfHorizontal(container, element) {
     }
 }
 
-function renderPdfRectangle(container, pdfRect) {
+function renderPdfRectangle(container, pdfRect, callback) {
     // Check for valid inputs
     if ((pdfRect.startX>1)|(pdfRect.endX>1)|(pdfRect.startY>1)|(pdfRect.endY>1)|
         (pdfRect.startX<0)|(pdfRect.endX<0)|(pdfRect.startY<0)|(pdfRect.endY<0)) {
@@ -179,7 +179,7 @@ function renderPdfRectangle(container, pdfRect) {
 
     var canvas = document.createElement('canvas');
     container.appendChild(canvas);
-    renderPdfClip(canvas, pdfRect.source, pdfRect.page, pdfRect.startX, pdfRect.startY, pdfRect.endX, pdfRect.endY);
+    renderPdfClip(canvas, pdfRect.source, pdfRect.page, pdfRect.startX, pdfRect.startY, pdfRect.endX, pdfRect.endY, callback);
 }
 
 /*
@@ -192,7 +192,7 @@ These are used as fractions of the whole page (.
 This is done by modifying the height and width of the canvas element that pdf.js renders to. It 
 then using canvas.translate to move to the correct section of the page.
 */
-function renderPdfClip(canvas, pdf_url, page_no, startX, startY, endX, endY) {
+function renderPdfClip(canvas, pdf_url, page_no, startX, startY, endX, endY, callback) {
     // NOTE:
     // Using a PDF from another server will likely *NOT* work. Because of browser
     // security restrictions, we have to use a file server with special headers
@@ -221,7 +221,12 @@ function renderPdfClip(canvas, pdf_url, page_no, startX, startY, endX, endY) {
         context.translate(-(viewport.width*startX),-(viewport.height*startY));
 
         // Render PDF page into canvas context
-        page.render({canvasContext: context, viewport: viewport});
+	if (typeof callback === "undefined") {
+	  page.render({canvasContext: context, viewport: viewport});
+	} else {
+	  page.render({canvasContext: context, viewport: viewport})
+	    .then(callback);
+	}
       });
     });
 

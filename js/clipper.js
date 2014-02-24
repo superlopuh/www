@@ -21,6 +21,7 @@ function generateListElement(id, source) {
 }
 
 function loadSource(source) {
+  console.log("Loading source "+source);
   $("#clipper-canvas")
     .attr("data-page", 1)
     .attr('data-source', source);
@@ -28,13 +29,23 @@ function loadSource(source) {
   $('#inputPDFUrl').val(source);
   $('#add-pdf').removeClass('empty');
 
-  renderPdfClip(document.getElementById("clipper-canvas"), source, 1, 0, 0, 1, 1);
+  var canvas = document.getElementById("clipper-canvas");
+  $("#clipper-control, #clipper-viewer").css("display", "none");
+  $("#clipper-loading").css("display", "block");
+
+  console.log("Loading");
+  renderPdfClip(canvas, source, 1, 0, 0, 1, 1, function() {
+    console.log("Loaded");
+    $("#clipper-control, #clipper-viewer").css("display", "block");
+    $("#clipper-loading").css("display", "none");
+  });
 }
 
 $('#inputPDFUrl').change(function(e) {
   e.preventDefault();
+  console.log("inputPDFUrl changed");
 
-  if ($("#inputPDFUrl").empty()) {
+  if ($("#inputPDFUrl").val()==="") {
     removeSelection();
 
     $("#clipper-recently-used-list").empty();
@@ -60,7 +71,8 @@ $('#next-page').click(function(e) {
   var page = Number($("#clipper-canvas").attr("data-page"))+1;
   var source = $("#clipper-canvas").attr("data-source");
   $("#clipper-canvas").attr("data-page", page);
-  renderPdfClip(document.getElementById("clipper-canvas"), source, page, 0, 0, 1, 1);
+  renderPdfClip(document.getElementById("clipper-canvas"), 
+    source, page, 0, 0, 1, 1);
   removeSelection();
 });
 
