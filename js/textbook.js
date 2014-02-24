@@ -171,6 +171,7 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function addPDFRectangleClip(source,page,startX,startY,endX,endY) {
@@ -185,6 +186,7 @@ function addPDFRectangleClip(source,page,startX,startY,endX,endY) {
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function addPDFHorizontalClip(source,startY,endY) {
@@ -196,6 +198,7 @@ function addPDFHorizontalClip(source,startY,endY) {
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function addYouTubeVid(source) {
@@ -205,6 +208,7 @@ function addYouTubeVid(source) {
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 function addYouTubeVid(source, start, end) {
 	var newElement 		 = {};
@@ -215,6 +219,7 @@ function addYouTubeVid(source, start, end) {
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function addText(text) {
@@ -224,6 +229,7 @@ function addText(text) {
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function addWiki(source) {
@@ -233,6 +239,7 @@ function addWiki(source) {
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function addImage(source) {
@@ -242,6 +249,7 @@ function addImage(source) {
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
 	renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
 }
 
 function previousPDFs() {

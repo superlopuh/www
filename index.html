@@ -238,7 +238,7 @@
       brackets.textbookContainer = document.getElementById('textbook');
       brackets.currentTextbook = createNewTextbook();
       $('#textbook').addClass("textbook_container")
-          .html('<div class="bs-callout bs-callout-info"><h4>Your textbook is currently empty.</h4> <p>Click a button below to add content.</p>');
+          .html('<div class="bs-callout bs-callout-info" id="empty-textbook"><h4>Your textbook is currently empty.</h4> <p>Click a button below to add content.</p>');
       $('#add-wrapper').show();
       clearClipper();
     }
