@@ -46,7 +46,11 @@ function renderComments(container, element) {
         $.each(element.comments, function( index, comment ) { 
             var comment_container = document.createElement('div');
             comment_container.className += "comment viewer";
-
+			
+			var delete_button = document.createElement('span');
+			delete_button.className = "deleteButton";
+			comment_container.appendChild(delete_button);
+			
             var author = document.createElement('span');
             author.textContent = comment.author;
             author.className += "author";
@@ -65,6 +69,11 @@ function renderElement(container, element) {
         //Create element container
         var element_container = document.createElement('div');
         element_container.className += "wrapper";
+		
+		var delete_button = document.createElement('span');
+		delete_button.className = "deleteButton";
+		element_container.appendChild(delete_button);
+		
         container.appendChild(element_container);
         //Render if we know how
         switch (element.type) {
@@ -75,7 +84,7 @@ function renderElement(container, element) {
             case 'pdfRectangle': 
                 element_container.className += " pdfRectangle";
                 renderPdfRectangle(element_container, element);
-                break;
+                break;				
             case 'youtube':
                 element_container.className += " youtube";
                 renderYoutubeElement(element_container, element);
@@ -95,6 +104,7 @@ function renderElement(container, element) {
             default:
                 break;
         }
+
 }
 
 function renderYoutubeElement(container, element) {
@@ -104,7 +114,7 @@ function renderYoutubeElement(container, element) {
     } else {
         tag = "<iframe class='yt_player' type='text/html' src='http://www.youtube.com/embed/"+element.source+"?start="+element.start+"&end="+element.end+"' frameborder='0'></iframe>";
     }
-    container.innerHTML = tag;
+    $(container).append(tag);
 }
 
 function renderImageElement(container, element) {
@@ -118,14 +128,15 @@ function renderWikipediaElement(container, element) {
         url: "http://en.wikipedia.org/w/index.php?action=render&title="+element.page,
         cache: false
     }).done(function( html ) {
-        container.innerHTML = html.substring(element.start,element.end);
+		$(container).append(html.substring(element.start,element.end));
+       // container.innerHTML = html.substring(element.start,element.end);
         $('.wikipedia a').contents().unwrap();
         $('.wikipedia img').attr('src', function(index, src) { return 'http:' + src; });
     });
 }
 
 function renderTextElement(container, element) {
-    container.innerHTML = mdconverter.makeHtml(element.text);
+    $(container).append(mdconverter.makeHtml(element.text));
 }
 
 function renderPdfHorizontal(container, element) {

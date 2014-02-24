@@ -179,28 +179,28 @@
 			}
     });
 
-    $( document ).ready(function() {
-
-      $('#add-wrapper').hide();
-
-      $('#edit-button').data('toggleState', true);
-      $('#edit-button').click(function() {
-        state = $(this).data('toggleState');
-        if (state) {
-          $(this).html("View");
-
-          // $(<input type="url" class="form-control" id="inputPdfUrl" placeholder="URL of PDF">
-          $('#bookTitle').attr("contenteditable", true);
-          $('#bookAuthor').attr("contenteditable", true);
-          $('#add-wrapper').show();
-        } else {
-          $(this).html("Edit");
-          $('#bookTitle').attr("contenteditable", false);
-          $('#bookAuthor').attr("contenteditable", false);
-          $('#add-wrapper').hide();
-        }
-        $(this).data('toggleState', !state);
-      })
+    $(document).ready(function () {
+    	$('#add-wrapper').hide();
+    	$('#edit-button').data('toggleState', true);
+    	$('#edit-button').click(function () {
+    		state = $(this).data('toggleState');
+    		if (state) {
+    			// We're in edit mode
+    			$(this).html("View");
+				$("span.deleteButton").show(); // Show delete buttons
+    			$('#bookTitle').attr("contenteditable", true);
+    			$('#bookAuthor').attr("contenteditable", true);
+    			$('#add-wrapper').show();
+    		} else {
+				// We're in view mode
+    			$(this).html("Edit");
+				$("span.deleteButton").hide(); // Hide delete buttons
+    			$('#bookTitle').attr("contenteditable", false);
+    			$('#bookAuthor').attr("contenteditable", false);
+    			$('#add-wrapper').hide();
+    		}
+    		$(this).data('toggleState', !state);
+    	})
     });
 
 		function openTextbook() {

@@ -231,3 +231,25 @@ form {
 #add-pdf:not(.empty) #clipper-viewer, #add-pdf:not(.empty) #clipper-control {
   display: block;
 }
+
+span.deleteButton {
+    width: 16px;
+    height: 16px;
+    background: url(../img/delete_icon.gif) no-repeat;
+    display: block;
+    float: right;
+    margin: 3px;
+	display: none;
+}
+
+.youtube .deleteButton {
+	margin: -20px -24px 0 0;
+}
+
+.wikipedia .deleteButton,.text .deleteButton {
+	margin: -28px -28px 0 0;
+}
+
+.comment .deleteButton {
+	margin: -10px -10px 0 0;
+}
