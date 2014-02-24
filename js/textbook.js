@@ -250,8 +250,8 @@ function previousPDFs() {
 	for (var el = 0; el < numberOfElements; el++) {
 		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" ||
 			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
-			if (!$.inArray(brackets.currentTextbook.elements[el].source, pdfLinks)) {
-				pdfLinks.append(brackets.currentTextbook.elements[el].source);
+			if ($.inArray(brackets.currentTextbook.elements[el].source, pdfLinks) == -1) {
+				pdfLinks.push(brackets.currentTextbook.elements[el].source);
 			}
 		}
 	};

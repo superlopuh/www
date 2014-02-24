@@ -205,9 +205,11 @@
 					brackets.currentTextbook = textbook;
 					brackets.textbookContainer = document.getElementById('textbook');
 					$("#clipper-recently-used-list").empty();
-					$.each(previousPDFs(), function(i, val) {
-						$("#clipper-recently-used-list").append("<li><a href="+tag+">" + tag + "</a></li>");
-					});
+					var pdfs = previousPDFs();
+					console.log(pdfs);
+					for (var i = 0; i < pdfs.length; i++) {
+						$("#clipper-recently-used-list").append("<li><a href="+pdfs[i]+">" + pdfs[i] + "</a></li>");
+					}
 					renderTextbook(document.getElementById('textbook'),textbook);
 				});
 			});
