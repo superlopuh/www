@@ -219,6 +219,7 @@
 					renderTextbook(document.getElementById('textbook'),textbook);
 				});
 			});
+			clearClipper();
 		}
 
   	function saveTextbook() {
@@ -239,6 +240,7 @@
       $('#textbook').addClass("textbook_container")
           .html('<div class="bs-callout bs-callout-info"><h4>Your textbook is currently empty.</h4> <p>Click a button below to add content.</p>');
       $('#add-wrapper').show();
+      clearClipper();
     }
 
     function putPdf() {

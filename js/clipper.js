@@ -42,7 +42,7 @@ $('#clipper-load').click(function(e) {
   e.preventDefault();
 
   if ($("#inputPDFUrl").val()==="") {
-    clear();
+    clearClipper();
     return;
   }
 
@@ -180,7 +180,7 @@ function removeSelection() {
   $('#add-clip').addClass('disabled');
 }
 
-function clear() {
+function clearClipper() {
   removeSelection();
   $("#inputPDFUrl").val("");
 
@@ -200,5 +200,5 @@ function clear() {
 
 $("#clipper-clear").click(function(e) {
   e.preventDefault();
-  clear();
+  clearClipper();
 });
