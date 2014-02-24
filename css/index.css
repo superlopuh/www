@@ -218,13 +218,13 @@ form {
 }
 
 #clipper-control {
-  margin-top: 20px;
+  margin-top: 50px;
   display: none;
 }
 
 #clipper-canvas {
   height: 90%;
-  margin: 5% auto;
+  margin: 20px auto 5%;
   background-color: white;
   border: 1px solid black;
 }
