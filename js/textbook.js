@@ -20,6 +20,8 @@ function textbookIsWellDefined(textbook) {
 		return false;
 	}
 	else {
+		// For each of the elements, see if they are well defined
+		// If one of them is not, then the whole textbook is not, so return false
 		var numberOfElements = textbook.elements.length;
 		for (var el = 0; el < numberOfElements; el++) {
 			if (!(elementIsWellDefined(textbook.elements[el]))) return false;
@@ -383,7 +385,7 @@ function describeTextbook() {
 	var textbookString = brackets.currentTextbook.name;
 	textbookString += " by " + brackets.currentTextbook.author + "\n";
 	var numberOfElements = brackets.currentTextbook.elements.length;
-	for (int i = 0; i < length; i++) {
+	for (var i = 0; i < length; i++) {
 		textbookString += "\n" + i + ": ";
 		switch(brackets.currentTextbook.elements[i].type) {
 			case 'pdfRectangle':
@@ -398,7 +400,7 @@ function describeTextbook() {
 				textbookString += "Wikipedia clip from  " + brackets.currentTextbook.elements[i].source;
 			case 'image':
 				textbookString += "Image from  " + brackets.currentTextbook.elements[i].source;
-			case default:
+			default:
 				textbookString += "Undefined type";
 		}
 	} 
