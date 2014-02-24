@@ -204,22 +204,20 @@
     });
 
 		function openTextbook() {
-      $('#edit-button').removeClass("disabled");
-  		brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
-  			$("#textbook").empty();
-      	$.getJSON("file:///" + fp, function(textbook) {
-          brackets.currentTextbook = textbook;
-          brackets.textbookContainer = document.getElementById('textbook');
-          $("#clipper-recently-used-list").empty();
-          $.each(previousPDFs(), function(i, val){
-            $("#clipper-recently-used-list").append("<li><a href="+val.tag+">" + val.tag + "</a></li>");
-          });
-          renderTextbook(document.getElementById('textbook'),textbook);
-			  });
-
-
-  		});
-    }
+			brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+				$('#edit-button').removeClass("disabled");
+				$("#textbook").empty();
+				$.getJSON("file:///" + fp, function(textbook) {
+					brackets.currentTextbook = textbook;
+					brackets.textbookContainer = document.getElementById('textbook');
+					$("#clipper-recently-used-list").empty();
+					$.each(previousPDFs(), function(i, val) {
+						$("#clipper-recently-used-list").append("<li><a href="+val.tag+">" + val.tag + "</a></li>");
+					});
+					renderTextbook(document.getElementById('textbook'),textbook);
+				});
+			});
+		}
 
   	function saveTextbook() {
       modifyTitle($('#bookTitle').html());
