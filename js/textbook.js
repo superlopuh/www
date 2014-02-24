@@ -264,10 +264,10 @@ function deleteElement(clipNumber) {
 	if (clipNumber >= 0 && clipNumber<numberOfElements) {
 		var newElements = [];
 		for (var el = 0; el < clipNumber; el++) {
-			newElements.append(brackets.currentTextbook.elements[el]);
+			newElements.push(brackets.currentTextbook.elements[el]);
 		}
 		for (var el = clipNumber+1; el < numberOfElements; el++) {
-			newElements.append(brackets.currentTextbook.elements[el]);
+			newElements.push(brackets.currentTextbook.elements[el]);
 		}
 		brackets.currentTextbook.elements = newElements;
 	}
@@ -284,27 +284,27 @@ function moveElement(oldPosition,newPosition) {
 		var newElements = [];
 		var firstChange = Math.min(oldPosition,newPosition);
 		for (var el = 0; el < firstChange; el++) {
-			newElements.append(brackets.currentTextbook.elements[el]);
+			newElements.push(brackets.currentTextbook.elements[el]);
 		}
 		// If move up the page
 		if (oldPosition > newPosition) {
-			newElements.append(brackets.currentTextbook.elements[oldPosition]);
+			newElements.push(brackets.currentTextbook.elements[oldPosition]);
 			for (var el = newPosition; el < oldPosition; el++) {
-				newElements.append(brackets.currentTextbook.elements[el]);
+				newElements.push(brackets.currentTextbook.elements[el]);
 			}
 			for (var el = oldPosition+1; el < numberOfElements; el++) {
-				newElements.append(brackets.currentTextbook.elements[el]);
+				newElements.push(brackets.currentTextbook.elements[el]);
 			}
 			brackets.currentTextbook.elements = newElements;
 		}
 		// If move down the page
 		else {
 			for (var el = oldPosition+1; el <= newPosition; el++) {
-				newElements.append(brackets.currentTextbook.elements[el]);
+				newElements.push(brackets.currentTextbook.elements[el]);
 			}
-			newElements.append(brackets.currentTextbook.elements[oldPosition]);
+			newElements.push(brackets.currentTextbook.elements[oldPosition]);
 			for (var el = newPosition+1; el < numberOfElements; el++) {
-				newElements.append(brackets.currentTextbook.elements[el]);
+				newElements.push(brackets.currentTextbook.elements[el]);
 			}
 			brackets.currentTextbook.elements = newElements;
 		}
@@ -316,7 +316,7 @@ function moveElement(oldPosition,newPosition) {
 function addComment(elementNumber,author,comment) {
 	var numberOfElements = brackets.currentTextbook.elements.length;
 	if (elementNumber >= 0 && elementNumber<numberOfElements) {
-		brackets.currentTextbook.elements[elementNumber].comments.append({
+		brackets.currentTextbook.elements[elementNumber].comments.push({
 			"author"  : author,
 			"comment" : comment
 		});
@@ -347,23 +347,20 @@ function getCommentAuthors() {
 	for (var el = 0; el < numberOfElements; el++) {
 		numberOfComments = brackets.currentTextbook.elements[el].comments.length;
 		for (var comm = 0; comm < numberOfComments; comm++) {
-			if (!(authors.contains(brackets.currentTextbook.elements[el].comments[comm].author))) {
-				authors.append(brackets.currentTextbook.elements[el].comments[comm].author);
+			if (!(contains(authors,brackets.currentTextbook.elements[el].comments[comm].author))) {
+				authors.push(brackets.currentTextbook.elements[el].comments[comm].author);
 			}
 		}
 	}
 	return authors;
 }
 
-var contains = function(needle) {
-	contains = function(needle) {
-		for (var i = 0; i < this.length; i++) {
-			if(this[i] === needle) {
-				return true;
-			}
+function contains(array, needle) {
+	for (var i = 0; i < array.length; i++) {
+		if(array[i] === needle) {
+			return true;
 		}
-	};
-	return contains.call(this, needle);
+	}
 }
 
 function noCommentTextbook() {
@@ -375,7 +372,7 @@ function noCommentTextbook() {
 	brackets.currentTextbook.elements.forEach(function(element) {
 		var virginElement = element;
 		virginElement.comments = [];
-		virginTextbook.elements.append(virginElement);
+		virginTextbook.elements.push(virginElement);
 	});
 	return virginTextbook;
 }
