@@ -6,6 +6,15 @@ body {
   margin: 16px;
 }
 
+#textbook h2 {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+#textbook a:hover {
+  text-decoration: none;
+}
+
 .textbook_container {
     /*border: 1px solid #d4d4d4;*/
     background-color: #fff;
