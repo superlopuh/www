@@ -50,7 +50,7 @@ $('#inputPDFUrl').change(function(e) {
 
     $("#clipper-recently-used-list").empty();
     $.each(previousPDFs(), function(i, val){
-      $("#clipper-recently-used-list").append("<li><a href="+val.tag+">" + val.tag + "</a></li>");
+      $("#clipper-recently-used-list").append("<li><a href="+val+">" + val + "</a></li>");
     });
 
     $('#add-pdf').addClass('empty');

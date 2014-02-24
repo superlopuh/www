@@ -206,7 +206,7 @@
 					brackets.textbookContainer = document.getElementById('textbook');
 					$("#clipper-recently-used-list").empty();
 					$.each(previousPDFs(), function(i, val) {
-						$("#clipper-recently-used-list").append("<li><a href="+val.tag+">" + val.tag + "</a></li>");
+						$("#clipper-recently-used-list").append("<li><a href="+tag+">" + tag + "</a></li>");
 					});
 					renderTextbook(document.getElementById('textbook'),textbook);
 				});
