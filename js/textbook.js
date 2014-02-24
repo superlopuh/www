@@ -55,7 +55,8 @@ function elementIsWellDefined(element) {
 				else if (typeof(element.startX) != "number" ||
 						 typeof(element.startY) != "number" ||
 						 typeof(element.endX) != "number" ||
-						 typeof(element.endY) != "number") {
+						 typeof(element.endY) != "number" ||
+						 typeof(element.page) != "number") {
 					return false;
 				}
 				// Check that end is after start
@@ -67,10 +68,62 @@ function elementIsWellDefined(element) {
 					return true;
 				}
 			case 'pdfHorizontal':
+				// Check that element has a source that is a string
+				if (typeof(element.source) != "string") {
+					return false;
+				}
+				// Check that element has all coordinates
+				else if (typeof(element.startY) != "number" ||
+						 typeof(element.endY) != "number") {
+					return false;
+				}
+				// Check that end is after start
+				else if (element.startY >= element.endY) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case 'youtube':
+				// Check that element has a source that is a string
+				if (typeof(element.source) != "string") {
+					return false;
+				}
+				// Check that element has all coordinates
+				else if (typeof(element.startTime) != "number") {
+					return false;
+				}
+				// Check that startTime is after 0
+				else if (element.startTime >= 0) {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case 'text' :
+				// Check that element has a text field
+				if (typeof(element.text) != "string") {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case 'wikipedia':
+				// Check that element has a source that is a string
+				if (typeof(element.source) != "string") {
+					return false;
+				}
+				else {
+					return true;
+				}
 			case 'image':
+				// Check that element has a source that is a string
+				if (typeof(element.source) != "string") {
+					return false;
+				}
+				else {
+					return true;
+				}
 			default:
 				return false;
 				break;
