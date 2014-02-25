@@ -331,6 +331,9 @@
 	text: "Are you sure you want to delete this element?",
 	confirm: function() {
 	  $target.slideUp(function() {
+	    if ($target.parent().children(".wrapper").length === 1) {
+	      $("#empty-textbook").css("display", "block");
+	    }
 	    $target.detach();
 	    deleteElement(index);
 	  });
