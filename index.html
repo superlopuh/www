@@ -180,14 +180,14 @@
     });
 
     function openEditMode() {
-      $(this).html("View");
+      $("#edit-button").html("View");
       $("body").addClass("edit-mode");
       $('#bookTitle').attr("contenteditable", true);
       $('#bookAuthor').attr("contenteditable", true);
     }
 
     function openViewMode() {
-      $(this).html("Edit");
+      $("#edit-button").html("Edit");
       $("body").removeClass("edit-mode");
       $('#bookTitle').attr("contenteditable", false);
       $('#bookAuthor').attr("contenteditable", false);
@@ -243,7 +243,6 @@
       brackets.currentTextbook = createNewTextbook();
       $("#textbook").empty();
       renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
-      $('#add-wrapper').show();
       clearClipper();
       openEditMode();
     }
