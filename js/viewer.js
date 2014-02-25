@@ -39,19 +39,19 @@ function renderTextbook(container, textbook) {
     author_wrapper.appendChild(author);
     header.appendChild(author_wrapper);
 
-    if (textbook.elements.length == 0) {
-      var empty_textbook = document.createElement("div");
-      empty_textbook.className += "bs-callout bs-callout-info";
-      empty_textbook.id = "empty-textbook";
-      empty_textbook.innerHTML = "<h4>This textbook is empty</h4>"
-	+ "<p>You can add new content in Edit mode.</p>";
-      container.appendChild(empty_textbook);
-    } else {
-      $.each(textbook.elements, function( index, element ) { 
-	  renderElement(container, element); 
-	  renderComments(container, element); 
-      });
-    }
+    var empty_textbook = document.createElement("div");
+    empty_textbook.className += "bs-callout bs-callout-info";
+    empty_textbook.id = "empty-textbook";
+    empty_textbook.innerHTML = "<h4>This textbook is empty</h4>"
+      + "<p>You can add new content in Edit mode.</p>";
+    $(empty_textbook).hide();
+    container.appendChild(empty_textbook);
+
+
+    $.each(textbook.elements, function( index, element ) { 
+	renderElement(container, element); 
+	renderComments(container, element); 
+    });
 }
 
 function renderComments(container, element) {
