@@ -173,6 +173,7 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
  	<script>
+
  		$(window).load(function() {
  			if (typeof(brackets.currentTextbook) != "undefined") {
 				renderTextbook(document.getElementById('textbook'),brackets.currentTextbook);
@@ -194,6 +195,7 @@
     }
 
     $(document).ready(function () {
+
     	$('#edit-button').data('toggleState', true);
     	$('#edit-button').click(function () {
     		state = $(this).data('toggleState');
@@ -203,28 +205,39 @@
 		  openViewMode();
 		}
     		$(this).data('toggleState', !state);
-    	})
+    	});
+
+	brackets.app.getPendingFilesToOpen(function(err,files) {
+	  if (files.length > 0) {
+	    loadTextbook(files[0]);
+	  }
+	});
+
     });
 
 		function openTextbook() {
 			brackets.fs.showOpenDialog (false, false, "Open a Textbook...", "", null, function(err,fp) {
 				if (fp == "") return;
-				$('#edit-button').removeClass("disabled");
-				$("#textbook").empty();
-				$.getJSON("file:///" + fp, function(textbook) {
-					brackets.currentTextbook = textbook;
-					brackets.textbookContainer = document.getElementById('textbook');
-					$("#clipper-recently-used-list").empty();
-					var pdfs = previousPDFs();
-					console.log(pdfs);
-					for (var i = 0; i < pdfs.length; i++) {
-						$("#clipper-recently-used-list").append("<li><a href="+pdfs[i]+">" + pdfs[i] + "</a></li>");
-					}
-					renderTextbook(document.getElementById('textbook'),textbook);
-				});
-				clearClipper();
-				openViewMode();
+				loadTextbook(fp);
 			});
+		}
+
+		function loadTextbook(filename) {
+		      $('#edit-button').removeClass("disabled");
+		      $("#textbook").empty();
+		      $.getJSON("file:///" + filename, function(textbook) {
+			      brackets.currentTextbook = textbook;
+			      brackets.textbookContainer = document.getElementById('textbook');
+			      $("#clipper-recently-used-list").empty();
+			      var pdfs = previousPDFs();
+			      console.log(pdfs);
+			      for (var i = 0; i < pdfs.length; i++) {
+				      $("#clipper-recently-used-list").append("<li><a href="+pdfs[i]+">" + pdfs[i] + "</a></li>");
+			      }
+			      renderTextbook(document.getElementById('textbook'),textbook);
+			      clearClipper();
+			      openViewMode();
+		      });
 		}
 
   	function saveTextbook() {
