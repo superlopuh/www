@@ -208,6 +208,7 @@
 
 		function openTextbook() {
 			brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+				if (fp == "") return;
 				$('#edit-button').removeClass("disabled");
 				$("#textbook").empty();
 				$.getJSON("file:///" + fp, function(textbook) {
