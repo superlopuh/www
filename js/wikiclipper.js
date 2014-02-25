@@ -13,6 +13,7 @@ modal_jq.on('shown.bs.modal', function (e) {
         wiki_cont_jq.html(html);
         wiki_cont_jq.find('a').contents().unwrap();
         wiki_cont_jq.find('img').attr('src', function(index, src) { return 'http:' + src; });
+        wiki_cont_jq.addClass('wikipedia wrapper');
     }).fail(function() {
         alert("Error fetching wikipedia page: "+page_title);
     });

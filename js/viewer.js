@@ -145,8 +145,8 @@ function renderWikipediaElement(container, element) {
         tmp_cont.id = "wiki_tmp_cont_to_delete";
         tmp_cont.innerHTML = html;
         container.appendChild(tmp_cont);
-        $('.wikipedia a').contents().unwrap();
-        $('.wikipedia img').attr('src', function(index, src) { return 'http:' + src; });
+        $(container).find('a').contents().unwrap();
+        $(container).find('img').attr('src', function(index, src) { return 'http:' + src; });
         if ((typeof element.start === 'number')&(typeof element.end === 'number')) {
             $('#wiki_tmp_cont_to_delete').selection(element.start, element.end);
             container.appendChild(document.getSelection().getRangeAt(0).extractContents());
