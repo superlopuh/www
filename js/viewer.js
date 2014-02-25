@@ -60,9 +60,9 @@ function renderComments(container, element) {
             var comment_container = document.createElement('div');
             comment_container.className += "comment viewer";
 			
-			var delete_button = document.createElement('span');
-			delete_button.className = "deleteButton";
-			comment_container.appendChild(delete_button);
+	    var delete_button = document.createElement('span');
+	    delete_button.className = "deleteButton";
+	    comment_container.appendChild(delete_button);
 			
             var author = document.createElement('span');
             author.textContent = comment.author;

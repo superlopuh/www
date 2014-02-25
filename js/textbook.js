@@ -6,6 +6,7 @@ function createNewTextbook() {
 	newTextbook.title 		= "Title";
 	newTextbook.author 		= "Author";
 	newTextbook.elements 	= [];
+	newTextbook.dirty = false;
 	return newTextbook;
 }
 
@@ -170,6 +171,7 @@ function addPDFRectangleClip(source,startX,startY,endX,endY) {
 	newElement.endY 	= endY;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -185,6 +187,7 @@ function addPDFRectangleClip(source,page,startX,startY,endX,endY) {
 	newElement.endY 	= endY;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -197,6 +200,7 @@ function addPDFHorizontalClip(source,startY,endY) {
 	newElement.endY 	= endY;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -207,6 +211,7 @@ function addYouTubeVid(source) {
 	newElement.source 	 = source;
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -218,6 +223,7 @@ function addYouTubeVid(source, start, end) {
 	newElement.end 		 = end;
 	newElement.comments  = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -228,6 +234,7 @@ function addText(text) {
 	newElement.text 	= text;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -239,6 +246,7 @@ function addWiki(source) {
 	newElement.page		= source.split("/").slice(-1)[0];
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -251,6 +259,7 @@ function addWiki(source, start, end) {
 	newElement.end 		= end;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -261,6 +270,7 @@ function addImage(source) {
 	newElement.source 	= source;
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
 	renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
@@ -286,17 +296,10 @@ function previousPDFs() {
 
 // If within range, delete. Else skip
 function deleteElement(clipNumber) {
-	var numberOfElements = brackets.currentTextbook.elements.length;
-	if (clipNumber >= 0 && clipNumber<numberOfElements) {
-		var newElements = [];
-		for (var el = 0; el < clipNumber; el++) {
-			newElements.push(brackets.currentTextbook.elements[el]);
-		}
-		for (var el = clipNumber+1; el < numberOfElements; el++) {
-			newElements.push(brackets.currentTextbook.elements[el]);
-		}
-		brackets.currentTextbook.elements = newElements;
-	}
+  if (clipNumber >= 0) {
+    brackets.currentTextbook.elements.splice(clipNumber, 1);
+  }
+  brackets.currentTextbook.dirty = true;
 }
 
 // Move element at index oldPosition in between element at index newPosition and the element at index (newPosition+1)
@@ -335,6 +338,7 @@ function moveElement(oldPosition,newPosition) {
 			brackets.currentTextbook.elements = newElements;
 		}
 	}
+	brackets.currentTextbook.dirty = true;
 }
 
 // Comment functions below
@@ -347,6 +351,7 @@ function addComment(elementNumber,author,comment) {
 			"comment" : comment
 		});
 	}
+	brackets.currentTextbook.dirty = true;
 }
 
 function deleteComment(elementNumber,commentNumber) {
@@ -364,6 +369,7 @@ function deleteComment(elementNumber,commentNumber) {
 			brackets.currentTextbook.elements[elementNumber].comments = newComments;
 		}
 	}
+	brackets.currentTextbook.dirty = true;
 }
 
 function getCommentAuthors() {
