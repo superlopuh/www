@@ -236,6 +236,7 @@ function addWiki(source) {
 	var newElement 		= {};
 	newElement.type 	= "wikipedia";
 	newElement.source 	= source;
+	newElement.page		= source.split("/").slice(-1)[0];
 	newElement.comments = [];
 	brackets.currentTextbook.elements.push(newElement);
     renderElement(brackets.textbookContainer, newElement);
