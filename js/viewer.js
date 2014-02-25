@@ -141,10 +141,19 @@ function renderWikipediaElement(container, element) {
         url: "http://en.wikipedia.org/w/index.php?action=render&title="+element.page,
         cache: false
     }).done(function( html ) {
-		$(container).append(html.substring(element.start,element.end));
-       // container.innerHTML = html.substring(element.start,element.end);
+        var tmp_cont = document.createElement('div');
+        tmp_cont.id = "wiki_tmp_cont_to_delete";
+        tmp_cont.innerHTML = html;
+        container.appendChild(tmp_cont);
         $('.wikipedia a').contents().unwrap();
         $('.wikipedia img').attr('src', function(index, src) { return 'http:' + src; });
+        if ((typeof element.start === 'number')&(typeof element.end === 'number')) {
+            $('#wiki_tmp_cont_to_delete').selection(element.start, element.end);
+            container.appendChild(document.getSelection().getRangeAt(0).extractContents());
+            $('#wiki_tmp_cont_to_delete').remove();
+        }
+    }).fail(function() {
+        console.log("Error fetching wikipedia page: "+element.page);
     });
 }
 

@@ -133,17 +133,30 @@
       <div class="tab-pane" id="add-wiki">
         <form class="form-horizontal" role="form">
           <div class="form-group">
-            <label for="inputWikipediaUrl" class="col-sm-2 control-label">URL of Wikipedia</label>
+            <label for="inputWikipediaUrl" class="col-sm-2 control-label">Wikipedia URL</label>
             <div class="col-sm-10">
-              <input type="url" class="form-control" id="inputWikipediaUrl" placeholder="Wikipedia URL">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" onclick="javascript:putWikipedia()" class="btn btn-success pull-right">Add</button>
+              <input type="text" class="form-control" id="inputWikipediaUrl" placeholder="Page URL">
             </div>
           </div>
         </form>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#wikiPreviewModal">Select Sections</button>
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="selectWikiPart" aria-hidden="true" id="wikiPreviewModal">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Wikipedia Input</h4>
+                Please use your mouse to select the data you want included, then click "Add".
+              </div>
+              <div class="modal-body">
+                <div id="wikiPreview">Loading page...</div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" onclick="javascript:putWikipedia()" class="btn btn-success pull-right">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane" id="add-text">
         <form class="form-horizontal" role="form">
@@ -167,9 +180,11 @@
 	<script src="libraries/pdf.js" type="text/javascript"></script>
 	<script src="libraries/compatibility.js" type="text/javascript"></script>
   <script src="libraries/showdown.js" type="text/javascript"></script>
+  <script src="libraries/jquerypp.selection.js" type="text/javascript"></script>
 	<script src="js/viewer.js" type="text/javascript"></script>
 	<script src="js/textbook.js" type="text/javascript"></script>
 	<script src="js/clipper.js" type="text/javascript"></script>
+  <script src="js/wikiclipper.js" type="text/javascript"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
  	<script>
@@ -292,7 +307,13 @@
     }
 
     function putWikipedia() {
-      addWiki($("#inputWikipediaUrl").val());
+      addWiki(
+          $("#inputWikipediaUrl").val(), 
+          wikiSelectStart, 
+          wikiSelectEnd
+      );
+      wiki_cont_jq.innerHTML = 'Loading page...';
+      modal_jq.modal('hide');
     }
 
     function putText() {

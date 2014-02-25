@@ -242,6 +242,18 @@ function addWiki(source) {
     renderElement(brackets.textbookContainer, newElement);
 	$("#empty-textbook").css("display", "none");
 }
+function addWiki(source, start, end) {
+	var newElement 		= {};
+	newElement.type 	= "wikipedia";
+	newElement.source 	= source;
+	newElement.page		= source.split("/").slice(-1)[0];
+	newElement.start 	= start;
+	newElement.end 		= end;
+	newElement.comments = [];
+	brackets.currentTextbook.elements.push(newElement);
+    renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
+}
 
 function addImage(source) {
 	var newElement 		= {};
