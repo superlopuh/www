@@ -264,7 +264,7 @@ function previousPDFs() {
 	for (var el = 0; el < numberOfElements; el++) {
 		if (brackets.currentTextbook.elements[el].type == "pdfRectangle" ||
 			brackets.currentTextbook.elements[el].type == "pdfHorizontal") {
-			if ($.inArray(brackets.currentTextbook.elements[el].source, pdfLinks) == -1) {
+			if (contains(pdfLinks, brackets.currentTextbook.elements[el].source)) {
 				pdfLinks.push(brackets.currentTextbook.elements[el].source);
 			}
 		}
@@ -370,11 +370,7 @@ function getCommentAuthors() {
 }
 
 function contains(array, needle) {
-	for (var i = 0; i < array.length; i++) {
-		if(array[i] === needle) {
-			return true;
-		}
-	}
+	return array.indexOf(needle) == -1;
 }
 
 function noCommentTextbook() {

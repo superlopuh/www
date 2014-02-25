@@ -207,7 +207,7 @@
     });
 
 		function openTextbook() {
-			brackets.fs.showOpenDialog (false, false, "title1", "", null, function(err,fp) {
+			brackets.fs.showOpenDialog (false, false, "Open a Textbook...", "", null, function(err,fp) {
 				if (fp == "") return;
 				$('#edit-button').removeClass("disabled");
 				$("#textbook").empty();
