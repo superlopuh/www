@@ -304,41 +304,17 @@ function deleteElement(clipNumber) {
 
 // Move element at index oldPosition in between element at index newPosition and the element at index (newPosition+1)
 function moveElement(oldPosition,newPosition) {
-	var numberOfElements = brackets.currentTextbook.elements.length;
-	if (oldPosition >= 0 && oldPosition<numberOfElements &&
-		newPosition >= 0 && newPosition<numberOfElements) {
-		// If no change then return
-		if (oldPosition == newPosition) {return;}
-		// Copy everything that's not going to be changed
-		var newElements = [];
-		var firstChange = Math.min(oldPosition,newPosition);
-		for (var el = 0; el < firstChange; el++) {
-			newElements.push(brackets.currentTextbook.elements[el]);
-		}
-		// If move up the page
-		if (oldPosition > newPosition) {
-			newElements.push(brackets.currentTextbook.elements[oldPosition]);
-			for (var el = newPosition; el < oldPosition; el++) {
-				newElements.push(brackets.currentTextbook.elements[el]);
-			}
-			for (var el = oldPosition+1; el < numberOfElements; el++) {
-				newElements.push(brackets.currentTextbook.elements[el]);
-			}
-			brackets.currentTextbook.elements = newElements;
-		}
-		// If move down the page
-		else {
-			for (var el = oldPosition+1; el <= newPosition; el++) {
-				newElements.push(brackets.currentTextbook.elements[el]);
-			}
-			newElements.push(brackets.currentTextbook.elements[oldPosition]);
-			for (var el = newPosition+1; el < numberOfElements; el++) {
-				newElements.push(brackets.currentTextbook.elements[el]);
-			}
-			brackets.currentTextbook.elements = newElements;
-		}
-	}
-	brackets.currentTextbook.dirty = true;
+  var numberOfElements = brackets.currentTextbook.elements.length;
+  if (oldPosition >= 0 && oldPosition<numberOfElements &&
+      newPosition >= 0 && newPosition<numberOfElements) {
+    // If no change then return
+    if (oldPosition == newPosition) {return;}
+
+    var element = brackets.currentTextbook.elements.splice(oldPosition, 1)[0];
+    var newelements = brackets.currentTextbook.elements.splice(newPosition, 0, element);
+    brackets.currentTextbook.elements = newelements;
+  }
+  brackets.currentTextbook.dirty = true;
 }
 
 // Comment functions below
