@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
   <link rel="stylesheet" href="css/index.css">
 
 	<meta charset="utf-8">
@@ -188,6 +189,7 @@
   <script src="js/wikiclipper.js" type="text/javascript"></script>
   <!-- Latest compiled and minified JavaScript -->
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
  	<script>
 
  		$(window).load(function() {
@@ -198,6 +200,7 @@
 
     function openEditMode() {
       $("#edit-button").html("View");
+      $('#textbook').sortable();
       $("body").addClass("edit-mode");
       $('#bookTitle').attr("contenteditable", true);
       $('#bookAuthor').attr("contenteditable", true);
@@ -205,29 +208,29 @@
 
     function openViewMode() {
       $("#edit-button").html("Edit");
+      $( "#textbook" ).sortable( "option", "disabled", true );
       $("body").removeClass("edit-mode");
       $('#bookTitle').attr("contenteditable", false);
       $('#bookAuthor').attr("contenteditable", false);
     }
 
     $(document).ready(function () {
-
     	$('#edit-button').data('toggleState', true);
     	$('#edit-button').click(function () {
     		state = $(this).data('toggleState');
-		if (state) {
-		  openEditMode();
-		} else {
-		  openViewMode();
-		}
+    		if (state) {
+    		  openEditMode();
+    		} else {
+    		  openViewMode();
+    		}
     		$(this).data('toggleState', !state);
     	});
 
-	brackets.app.getPendingFilesToOpen(function(err,files) {
-	  if (files.length > 0) {
-	    loadTextbook(files[0]);
-	  }
-	});
+    	brackets.app.getPendingFilesToOpen(function(err,files) {
+    	  if (files.length > 0) {
+    	    loadTextbook(files[0]);
+    	  }
+    	});
 
     });
 
@@ -310,8 +313,8 @@
 
     function putWikipedia() {
       addWiki(
-          $("#inputWikipediaUrl").val(), 
-          wikiSelectStart, 
+          $("#inputWikipediaUrl").val(),
+          wikiSelectStart,
           wikiSelectEnd
       );
       wiki_cont_jq.innerHTML = 'Loading page...';
