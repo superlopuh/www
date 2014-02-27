@@ -1,9 +1,16 @@
 body {
     text-align: center;
+	padding-top: 44px; /* Compensate for fixed menubar */
 }
 
 .header {
-  margin: 16px;
+	background-color: rgba(200,200,200,0.3);
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	width: 100%;
+	padding: 5px;
+	z-index: 1;
 }
 
 #textbook h2 {
@@ -39,7 +46,6 @@ body {
     margin-left: 5%; margin-right: 5%;
     margin-top: 2em; margin-bottom: 2em;
     padding: 5%;
-    padding-right: 200px;
     width: 80%;
     border-top: 1px solid #d4d4d4; border-bottom: 1px solid #d4d4d4;
     overflow: hidden;
@@ -50,6 +56,7 @@ body {
     background-image: url("../img/WikiElementBG.png");
     background-position: right top;
     background-repeat: no-repeat;
+	padding-right: 200px;
 }
 
 #wikiPreview {
@@ -223,7 +230,7 @@ form {
 }
 
 #clipper-recently-used {
-  min-height: 500px;
+  /* min-height: 500px; why? dh */
 }
 
 #add-pdf:not(.empty) #clipper-recently-used {
@@ -231,7 +238,8 @@ form {
 }
 
 #add-pdf form button {
-  width: 100%;
+	width: 100%;
+	margin-top: 2px;
 }
 
 #clipper-viewer {
@@ -287,8 +295,12 @@ body.edit-mode span.deleteButton {
 	margin: -20px -24px 0 0;
 }
 
-.wikipedia .deleteButton,.text .deleteButton {
+.text .deleteButton {
 	margin: -28px -28px 0 0;
+}
+
+.wikipedia .deleteButton {
+	margin: -28px -197px 0 0;
 }
 
 .comment .deleteButton {

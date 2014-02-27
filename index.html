@@ -1,350 +1,189 @@
 <!doctype html>
 <html>
-<head>
-	<title>
-		BookJockey
-	</title>
-  <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" title="no title" charset="utf-8">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-  <link rel="stylesheet" href="css/index.css">
 
+<head>
+	<title>BookJockey</title>
+	<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen" title="no title">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" href="css/index.css">
 	<meta charset="utf-8">
 </head>
+
 <body>
-	<div class = "header">
-		<div class = "buttons">
-			<div class = "left">
-  		</div>
-  		<div class = "right">
-        <button id="new-button" type="button" onclick="javascript:renderNewTextbook();" class="btn btn-primary">New</button>
-        <button id="open-button" type="button" onclick="javascript:openTextbook();" class="btn btn-primary">Open</button>
-        <button id="edit-button" type="button" class="btn btn-primary disabled">Edit</button>
-        <button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-success">Save</button>
-		  </div>
+	<div class="header">
+		<div class="buttons">
+			<div class="left"></div>
+			<div class="right">
+				<button id="new-button" type="button" onclick="javascript:renderNewTextbook();" class="btn btn-primary">New</button>
+				<button id="open-button" type="button" onclick="javascript:openTextbook();" class="btn btn-primary">Open</button>
+				<button id="edit-button" type="button" class="btn btn-primary disabled">Edit</button>
+				<button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-success">Save</button>
+			</div>
 		</div>
 	</div>
-
 	<div id="textbook">
-    <h1>Welcome to <b>BookJockey</b>!</h1>
-    <h2><a onclick="javascript:renderNewTextbook();">Create new textbook</a></h2>
-    <h2><a onclick="javascript:openTextbook();">Open an existing textbook</a></h2>
-  </div>
-
-  <!-- Nav tabs -->
-  <div id="add-wrapper">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#add-pdf" data-toggle="tab">Add PDF</a></li>
-      <li><a href="#add-youtube" data-toggle="tab">Add YouTube</a></li>
-      <li><a href="#add-image" data-toggle="tab">Add Image</a></li>
-      <li><a href="#add-wiki" data-toggle="tab">Add Wikipedia</a></li>
-      <li><a href="#add-text" data-toggle="tab">Add Text</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <div class="tab-pane active empty" id="add-pdf">
-        <form class="form-horizontal" role="search">
-	  <div class="form-group">
-	    <label for="inputPDFUrl" class="col-sm-2 control-label">PDF URL</label>
-	    <div class="col-sm-6">
-	      <input type="url" class="form-control" id="inputPDFUrl" placeholder="URL of PDF file">
-	    </div>
-	    <div class="col-sm-2">
-	      <button type="button" id="clipper-load" class="btn btn-primary">Load</button>
-	    </div>
-	    <div class="col-sm-2">
-	      <button type="button" id="clipper-clear" class="btn btn-default">Clear</button>
-	    </div>
-	  </div>
-	</form>
-	<div class="col-sm-12" id="clipper-recently-used">
-	  <h1>Recently used</h1>
-	  <ul id="clipper-recently-used-list">
-	    <li><i>Empty</i></li>
-	  </ul>
+		<h1>Welcome to <b>BookJockey</b>!</h1>
+		<h2><a onclick="javascript:renderNewTextbook();">Create new textbook</a></h2>
+		<h2><a onclick="javascript:openTextbook();">Open an existing textbook</a></h2>
 	</div>
-
-	<div class="col-sm-12" id="clipper-control">
-	  <button type="button" class="btn btn-default" id="previous-page">
-	    &laquo; Previous page
-	  </a>
-
-	  <button type="button" class="btn btn-success disabled" id="add-clip">
-	    Add current selection
-	  </a>
-
-	  <button type="button" class="btn btn-default" id="next-page">
-	    Next page &raquo;
-	  </a>
+	<!-- Nav tabs -->
+	<div id="add-wrapper">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#add-pdf" data-toggle="tab">Add PDF</a>
+			</li>
+			<li><a href="#add-youtube" data-toggle="tab">Add YouTube</a>
+			</li>
+			<li><a href="#add-image" data-toggle="tab">Add Image</a>
+			</li>
+			<li><a href="#add-wiki" data-toggle="tab">Add Wikipedia</a>
+			</li>
+			<li><a href="#add-text" data-toggle="tab">Add Text</a>
+			</li>
+		</ul>
+		<!-- Tab panes -->
+		<div class="tab-content">
+			<div class="tab-pane active empty" id="add-pdf">
+				<form class="form-horizontal" role="search">
+					<div class="form-group">
+						<label for="inputPDFUrl" class="col-sm-2 control-label">PDF URL</label>
+						<div class="col-sm-6">
+							<input type="url" class="form-control" id="inputPDFUrl" placeholder="URL of PDF file">
+						</div>
+						<div class="col-sm-2">
+							<button type="button" id="clipper-load" class="btn btn-primary">Load</button>
+						</div>
+						<div class="col-sm-2">
+							<button type="button" id="clipper-clear" class="btn btn-default">Clear</button>
+						</div>
+					</div>
+				</form>
+				<div class="col-sm-12" id="clipper-recently-used">
+					<h1>Recently used</h1>
+					<ul id="clipper-recently-used-list">
+						<li><i>Empty</i>
+						</li>
+					</ul>
+				</div>
+				<div class="col-sm-12" id="clipper-control">
+					<button type="button" class="btn btn-default" id="previous-page">&laquo; Previous page</button>
+					<button type="button" class="btn btn-success disabled" id="add-clip">Add current selection</button>
+					<button type="button" class="btn btn-default" id="next-page">Next page &raquo;</button>
+				</div>
+				<div class="col-sm-12" id="clipper-viewer">
+					<div id="clipper-overlay"></div>
+					<canvas id="clipper-canvas"></canvas>
+				</div>
+				<div class="col-sm-12" id="clipper-loading">
+					<h2>Loading...</h2>
+				</div>
+			</div>
+			<div class="tab-pane" id="add-youtube">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputYouTubeUrl" class="col-sm-2 control-label">YouTube URL</label>
+						<div class="col-sm-10">
+							<input type="url" class="form-control" id="inputYouTubeUrl" placeholder="URL of YouTube video">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ytStart" class="col-sm-2 control-label">Start Time (seconds)</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="ytStart" placeholder="leave blank for full video">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="ytEnd" class="col-sm-2 control-label">End Time (seconds)</label>
+						<div class="col-sm-10">
+							<input type="number" class="form-control" id="ytEnd" placeholder="leave blank for full video">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="button" onclick="javascript:putYouTube()" class="btn btn-success pull-right">Add</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="tab-pane" id="add-image">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputImageUrl" class="col-sm-2 control-label">URL of Image</label>
+						<div class="col-sm-10">
+							<input type="url" class="form-control" id="inputImageUrl" placeholder="URL of Image">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="button" onclick="javascript:putImage()" class="btn btn-success pull-right">Add</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="tab-pane" id="add-wiki">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputWikipediaUrl" class="col-sm-2 control-label">Wikipedia URL</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputWikipediaUrl" placeholder="Page URL">
+						</div>
+					</div>
+				</form>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#wikiPreviewModal">Select Sections</button>
+				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="wikiPreviewModal">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Wikipedia Input</h4>
+								Please use your mouse to select the data you want included, then click "Add".</div>
+							<div class="modal-body">
+								<div id="wikiPreview">Loading page...</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" onclick="javascript:putWikipedia()" class="btn btn-success pull-right">Add</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="add-text">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputText" class="col-sm-2 control-label">Text</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" id="inputText" placeholder="Text" rows="3"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button type="button" onclick="javascript:putText()" class="btn btn-success pull-right">Add</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
-
-	<div class="col-sm-12" id="clipper-viewer">
-	  <div id="clipper-overlay"></div>
-	  <canvas id="clipper-canvas"></canvas>
-	</div>
-
-	<div class="col-sm-12" id="clipper-loading">
-	  <h2>Loading...</h2>
-	</div>
-      </div>
-      <div class="tab-pane" id="add-youtube">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="inputYouTubeUrl" class="col-sm-2 control-label">YouTube URL</label>
-            <div class="col-sm-10">
-              <input type="url" class="form-control" id="inputYouTubeUrl" placeholder="URL of YouTube video">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="ytStart" class="col-sm-2 control-label">Start Time (seconds)</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="ytStart" placeholder="leave blank for full video">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="ytEnd" class="col-sm-2 control-label">End Time (seconds)</label>
-            <div class="col-sm-10">
-              <input type="number" class="form-control" id="ytEnd" placeholder="leave blank for full video">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" onclick="javascript:putYouTube()" class="btn btn-success pull-right">Add</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="tab-pane" id="add-image">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="inputImageUrl" class="col-sm-2 control-label">URL of Image</label>
-            <div class="col-sm-10">
-              <input type="url" class="form-control" id="inputImageUrl" placeholder="URL of Image">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" onclick="javascript:putImage()" class="btn btn-success pull-right">Add</button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div class="tab-pane" id="add-wiki">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="inputWikipediaUrl" class="col-sm-2 control-label">Wikipedia URL</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputWikipediaUrl" placeholder="Page URL">
-            </div>
-          </div>
-        </form>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#wikiPreviewModal">Select Sections</button>
-        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="selectWikiPart" aria-hidden="true" id="wikiPreviewModal">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Wikipedia Input</h4>
-                Please use your mouse to select the data you want included, then click "Add".
-              </div>
-              <div class="modal-body">
-                <div id="wikiPreview">Loading page...</div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" onclick="javascript:putWikipedia()" class="btn btn-success pull-right">Add</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="tab-pane" id="add-text">
-        <form class="form-horizontal" role="form">
-          <div class="form-group">
-            <label for="inputText" class="col-sm-2 control-label">Text</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" id="inputText" placeholder="Text" rows="3"></textarea>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="button" onclick="javascript:putText()" class="btn btn-success pull-right">Add</button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
 	<script src="libraries/jquery.js"></script>
-	<script src="libraries/pdf.js" type="text/javascript"></script>
-	<script src="libraries/compatibility.js" type="text/javascript"></script>
-  <script src="libraries/showdown.js" type="text/javascript"></script>
-  <script src="libraries/jquerypp.selection.js" type="text/javascript"></script>
-  <script src="libraries/jquery.confirm.min.js" type="text/javascript"></script>
-	<script src="js/viewer.js" type="text/javascript"></script>
-	<script src="js/textbook.js" type="text/javascript"></script>
-	<script src="js/clipper.js" type="text/javascript"></script>
-  <script src="js/wikiclipper.js" type="text/javascript"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
- 	<script>
+	<script src="libraries/pdf.js"></script>
+	<script src="libraries/compatibility.js"></script>
+	<script src="libraries/showdown.js"></script>
+	<script src="libraries/jquerypp.selection.js"></script>
+	<script src="libraries/jquery.confirm.min.js"></script>
+	
+		<!-- Latest compiled and minified JavaScript -->
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	
+	<script src="js/viewer.js"></script>
+	<script src="js/textbook.js"></script>
+	<script src="js/clipper.js"></script>
+	<script src="js/wikiclipper.js"></script>
+	<script src="js/index.js"></script>
 
- 		$(window).load(function() {
- 			if (typeof(brackets.currentTextbook) != "undefined") {
-				renderTextbook(document.getElementById('textbook'),brackets.currentTextbook);
-			}
-    });
+	
 
-    function openEditMode() {
-      $("#edit-button").html("View");
-      $('#textbook').sortable();
-      $("body").addClass("edit-mode");
-      $('#bookTitle').attr("contenteditable", true);
-      $('#bookAuthor').attr("contenteditable", true);
-    }
-
-    function openViewMode() {
-      $("#edit-button").html("Edit");
-      $( "#textbook" ).sortable( "option", "disabled", true );
-      $("body").removeClass("edit-mode");
-      $('#bookTitle').attr("contenteditable", false);
-      $('#bookAuthor').attr("contenteditable", false);
-    }
-
-    $(document).ready(function () {
-    	$('#edit-button').data('toggleState', true);
-    	$('#edit-button').click(function () {
-    		state = $(this).data('toggleState');
-    		if (state) {
-    		  openEditMode();
-    		} else {
-    		  openViewMode();
-    		}
-    		$(this).data('toggleState', !state);
-    	});
-
-    	brackets.app.getPendingFilesToOpen(function(err,files) {
-    	  if (files.length > 0) {
-    	    loadTextbook(files[0]);
-    	  }
-    	});
-
-    });
-
-		function openTextbook() {
-			brackets.fs.showOpenDialog (false, false, "Open a Textbook...", "", null, function(err,fp) {
-				if (fp == "") return;
-				loadTextbook(fp);
-			});
-		}
-
-		function loadTextbook(filename) {
-		      $('#edit-button').removeClass("disabled");
-		      $("#textbook").empty();
-		      $.getJSON("file:///" + filename, function(textbook) {
-			      brackets.currentTextbook = textbook;
-			      brackets.textbookContainer = document.getElementById('textbook');
-			      $("#clipper-recently-used-list").empty();
-			      var pdfs = previousPDFs();
-			      console.log(pdfs);
-			      for (var i = 0; i < pdfs.length; i++) {
-				      $("#clipper-recently-used-list").append("<li><a href="+pdfs[i]+">" + pdfs[i] + "</a></li>");
-			      }
-			      renderTextbook(document.getElementById('textbook'),textbook);
-			      clearClipper();
-			      openViewMode();
-		      });
-		}
-
-  	function saveTextbook() {
-      modifyTitle($('#bookTitle').html());
-      modifyAuthor($('#bookAuthor').html());
-	  var proposed_filename = $("#bookTitle").text();
-	  proposed_filename = proposed_filename.replace(/[\/:\*\?\"<>|]/g,"");
-	  proposed_filename = proposed_filename.replace(/\s+/g,"_");
-    	brackets.fs.showSaveDialog("title2","",proposed_filename+".lima", function(err,fp) {
-  			brackets.fs.writeFile(fp, JSON.stringify(brackets.currentTextbook), "utf8", function(){});
-  		});
-  	}
-
-    function renderNewTextbook() {
-      $('#edit-button').removeClass("disabled");
-      brackets.textbookContainer = document.getElementById('textbook');
-      brackets.currentTextbook = createNewTextbook();
-      $("#textbook").empty();
-      renderTextbook(document.getElementById('textbook'), brackets.currentTextbook);
-      $("#empty-textbook").show();
-      clearClipper();
-      openEditMode();
-    }
-
-    function putPdf() {
-      addPDFHorizontalClip($("#inputPdfUrl").val(), $("#pdfStart").val(), $("#pdfEnd").val());
-    }
-
-    function putYouTube() {
-      var url = $("#inputYouTubeUrl").val();
-      //Extract ID
-      var id = "";
-      var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-      var match = url.match(regExp);
-      if (match&&match[2].length==11){
-          id = match[2];
-      }else{
-          console.log("Could not process given youtube url");
-      }
-      //Get start and end times if possible
-      var start = $("#ytStart").val();
-      var end = $("#ytEnd").val();
-      if ((start == null)||(end == null)) {
-        addYouTubeVid(id);
-      } else {
-        addYouTubeVid(id, start, end);
-      }
-      renderElement(brackets.textbookContainer, newElement);
-    }
-
-    function putImage() {
-      addImage($("#inputImageUrl").val());
-    }
-
-    function putWikipedia() {
-      addWiki(
-          $("#inputWikipediaUrl").val(),
-          wikiSelectStart,
-          wikiSelectEnd
-      );
-      wiki_cont_jq.innerHTML = 'Loading page...';
-      modal_jq.modal('hide');
-    }
-
-    function putText() {
-      addText($("#inputText").val());
-    }
-
-    $("form").on("submit", function(e) { e.preventDefault(); });
-
-    $(document).on("click", ".wrapper .deleteButton", function(e) {
-      var $target = $(e.target).closest(".wrapper")
-      var index = $target.parent().children(".wrapper").index($target);
-
-      $.confirm({
-	text: "Are you sure you want to delete this element?",
-	confirm: function() {
-	  $target.slideUp(function() {
-	    if ($target.parent().children(".wrapper").length === 1) {
-	      $("#empty-textbook").css("display", "block");
-	    }
-	    $target.detach();
-	    deleteElement(index);
-	  });
-	}
-      });
-    });
-
-  </script>
 </body>
+
 </html>
