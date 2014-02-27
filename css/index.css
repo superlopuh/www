@@ -125,9 +125,13 @@ body {
   display: block;
   margin: 16px auto;
   /*max-width: 500px;*/
-  border: 1px solid #333;
-  background-color: white;
+  border: 1px solid #fff;
+  background-color: #fff;
 }
+
+  .wrapper:hover {
+    border-color: #e3e3e3;
+  }
 
 .bs-callout {
   margin: 20px 0;
