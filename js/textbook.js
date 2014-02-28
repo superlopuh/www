@@ -1,6 +1,7 @@
 
 // The textbook is stored in brackets.currentTextbook
 
+// Creates a new textbook, with all the required fields
 function createNewTextbook() {
 	var newTextbook 		= {};
 	newTextbook.title 		= "Title";
@@ -10,6 +11,8 @@ function createNewTextbook() {
 	return newTextbook;
 }
 
+// Tests the textbook for validity, returns true if all the fields necessary for the operations we perform on it are present
+// Note: will return true even if there are extra fields in the JSON, that are possibly unnecessary
 function textbookIsWellDefined(textbook) {
 	if (typeof(textbook.title) != "string") {
 		return false;
@@ -31,6 +34,7 @@ function textbookIsWellDefined(textbook) {
 	}
 }
 
+// Tests an element of the textbook for validity
 function elementIsWellDefined(element) {
 	// Check that element has a type that is a string
 	if (typeof(element.type) != "string") {
@@ -134,6 +138,7 @@ function elementIsWellDefined(element) {
 	}
 }
 
+// Tests a comment for validity
 function commentIsWellDefined(comment) {
 	// Check that comment has an author that is a string
 	if (typeof(comment.author) != "string") {
@@ -275,6 +280,7 @@ function addImage(source) {
 	$("#empty-textbook").css("display", "none");
 }
 
+// Returns an array of URLs of pdfs in the textbook
 function previousPDFs() {
 	var pdfLinks = [];
 
@@ -381,6 +387,7 @@ function noCommentTextbook() {
 	return virginTextbook;
 }
 
+// Returns a string describing the textbook and the sources of its elements
 function describeTextbook() {
 	var textbookString = brackets.currentTextbook.name;
 	textbookString += " by " + brackets.currentTextbook.author + "\n";
