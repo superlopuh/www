@@ -87,24 +87,12 @@
 							<input type="url" class="form-control" id="inputYouTubeUrl" placeholder="URL of YouTube video">
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="ytStart" class="col-sm-2 control-label">Start Time (seconds)</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="ytStart" placeholder="leave blank for full video">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="ytEnd" class="col-sm-2 control-label">End Time (seconds)</label>
-						<div class="col-sm-10">
-							<input type="number" class="form-control" id="ytEnd" placeholder="leave blank for full video">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-offset-2 col-sm-10">
-							<button type="button" onclick="javascript:putYouTube()" class="btn btn-success pull-right">Add</button>
-						</div>
-					</div>
 				</form>
+				<div>
+					<div id="slider-container"></div>
+					<button type="button" onclick="javascript:showYoutubeClipper()" class="btn btn-default pull-left">Select start and end points</button>
+					<button type="button" onclick="javascript:putYouTube()" class="btn btn-success pull-right">Add</button>
+				</div>
 			</div>
 			<div class="tab-pane" id="add-image">
 				<form class="form-horizontal" role="form">
@@ -180,9 +168,8 @@
 	<script src="js/textbook.js"></script>
 	<script src="js/clipper.js"></script>
 	<script src="js/wikiclipper.js"></script>
+	<script src="js/youtubeclipper.js"></script>
 	<script src="js/index.js"></script>
-
-	
 
 </body>
 

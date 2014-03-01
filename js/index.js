@@ -91,22 +91,16 @@ function putPdf() {
 function putYouTube() {
 	var url = $("#inputYouTubeUrl").val();
 	//Extract ID
-	var id = "";
-	var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-	var match = url.match(regExp);
-	if (match && match[2].length == 11) {
-		id = match[2];
-	} else {
-		console.log("Could not process given youtube url");
-	}
+	var id = extractYouTubeId(url);
 	//Get start and end times if possible
-	var start = $("#ytStart").val();
-	var end = $("#ytEnd").val();
+	var start = $("#ytStart").text();
+	var end = $("#ytEnd").text();
 	if ((start == null) || (end == null)) {
 		addYouTubeVid(id);
 	} else {
 		addYouTubeVid(id, start, end);
 	}
+	$('.youtube-slider').remove();
 	renderElement(brackets.textbookContainer, newElement);
 }
 
@@ -146,3 +140,9 @@ $(document).on("click", ".wrapper .deleteButton", function (e) {
 		}
 	});
 });
+
+function showYoutubeClipper() {
+	var container = document.getElementById('slider-container');
+	var id = extractYouTubeId($("#inputYouTubeUrl").val());
+	setupYoutubeClipper(container, id, 'ytStart', 'ytEnd');
+}
