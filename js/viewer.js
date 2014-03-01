@@ -106,6 +106,10 @@ function renderElement(container, element, callback) {
                 element_container.className += " wikipedia";
                 renderWikipediaElement(element_container, element);
                 break;
+            case 'webpage':
+                element_container.className += " webpage";
+                renderWebElement(element_container, element);
+                break;
             case 'image':
                 element_container.className += " image";
                 renderImageElement(element_container, element);
@@ -154,6 +158,27 @@ function renderWikipediaElement(container, element) {
         }
     }).fail(function() {
         console.log("Error fetching wikipedia page: "+element.page);
+    });
+}
+
+function renderWebElement(container, element) {
+    $.ajax({
+        url: element.source,
+        cache: false
+    }).done(function( html ) {
+        var tmp_cont = document.createElement('div');
+        tmp_cont.id = "web_tmp_cont_to_delete";
+        tmp_cont.innerHTML = html;
+        container.appendChild(tmp_cont);
+        $(container).find('a').contents().unwrap();
+        $(container).find('img').attr('src', function(index, src) { return 'http:' + src; });
+        if ((typeof element.start === 'number')&(typeof element.end === 'number')) {
+            $('#web_tmp_cont_to_delete').selection(element.start, element.end);
+            container.appendChild(document.getSelection().getRangeAt(0).extractContents());
+            $('#web_tmp_cont_to_delete').remove();
+        }
+    }).fail(function() {
+        console.log("Error fetching webpage: "+element.page);
     });
 }
 

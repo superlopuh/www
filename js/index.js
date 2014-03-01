@@ -141,6 +141,16 @@ $(document).on("click", ".wrapper .deleteButton", function (e) {
 	});
 });
 
+function putWeb() {
+	addWeb(
+		$("#inputWebUrl").val(),
+		webSelectStart,
+		webSelectEnd
+	);
+	web_cont_jq.innerHTML = 'Loading page...';
+	web_modal_jq.modal('hide');
+}
+
 function showYoutubeClipper() {
 	var container = document.getElementById('slider-container');
 	var id = extractYouTubeId($("#inputYouTubeUrl").val());

@@ -117,6 +117,14 @@ function elementIsWellDefined(element) {
 				}
 			case 'wikipedia':
 				// Check that element has a source that is a string
+				if (typeof(element.page) != "string") {
+					return false;
+				}
+				else {
+					return true;
+				}
+			case 'webpage':
+				// Check that element has a source that is a string
 				if (typeof(element.source) != "string") {
 					return false;
 				}
@@ -260,6 +268,29 @@ function addWiki(source, start, end) {
 	newElement.type 	= "wikipedia";
 	newElement.source 	= source;
 	newElement.page		= source.split("/").slice(-1)[0];
+	newElement.start 	= start;
+	newElement.end 		= end;
+	newElement.comments = [];
+	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
+    renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
+}
+
+function addWeb(source) {
+	var newElement 		= {};
+	newElement.type 	= "webpage";
+	newElement.source 	= source;
+	newElement.comments = [];
+	brackets.currentTextbook.elements.push(newElement);
+	brackets.currentTextbook.dirty = true;
+    renderElement(brackets.textbookContainer, newElement);
+	$("#empty-textbook").css("display", "none");
+}
+function addWeb(source, start, end) {
+	var newElement 		= {};
+	newElement.type 	= "webpage";
+	newElement.source 	= source;
 	newElement.start 	= start;
 	newElement.end 		= end;
 	newElement.comments = [];

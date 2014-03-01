@@ -41,6 +41,8 @@
 			</li>
 			<li><a href="#add-text" data-toggle="tab">Add Text</a>
 			</li>
+			<li><a href="#add-web" data-toggle="tab">Add Webpage</a>
+			</li>
 		</ul>
 		<!-- Tab panes -->
 		<div class="tab-content">
@@ -151,6 +153,33 @@
 					</div>
 				</form>
 			</div>
+			<div class="tab-pane" id="add-web">
+				<form class="form-horizontal" role="form">
+					<div class="form-group">
+						<label for="inputWebUrl" class="col-sm-2 control-label">Website URL</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="inputWebUrl" placeholder="Page URL">
+						</div>
+					</div>
+				</form>
+				<button class="btn btn-primary" data-toggle="modal" data-target="#webPreviewModal">Select Sections</button>
+				<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="webPreviewModal">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title">Webpage Input</h4>
+								Please use your mouse to select the data you want included, then click "Add".</div>
+							<div class="modal-body">
+								<div id="webPreview">Loading page...</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" onclick="javascript:putWeb()" class="btn btn-success pull-right">Add</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="libraries/jquery.js"></script>
@@ -168,6 +197,7 @@
 	<script src="js/textbook.js"></script>
 	<script src="js/clipper.js"></script>
 	<script src="js/wikiclipper.js"></script>
+	<script src="js/webclipper.js"></script>
 	<script src="js/youtubeclipper.js"></script>
 	<script src="js/index.js"></script>
 
