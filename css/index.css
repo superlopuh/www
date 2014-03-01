@@ -41,7 +41,7 @@ body {
     max-width: 90%;
 }
 
-.wikipedia, .text {
+.wikipedia, .text, .webpage {
     text-align: left;
     margin-left: 5%; margin-right: 5%;
     margin-top: 2em; margin-bottom: 2em;
@@ -59,8 +59,9 @@ body {
 	padding-right: 200px;
 }
 
-#wikiPreview {
+#wikiPreview, #webPreview {
   text-align: left;
+  overflow-x: scroll;
 }
 
 .comment {
