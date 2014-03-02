@@ -21,7 +21,8 @@ $(window).load(function () {
 
 function openEditMode() {
 	$("#edit-button").html("View");
-	$('#textbook').sortable();
+	$('#textbook').sortable({items: '.wrapper'});
+	$("#textbook").sortable( "option", "disabled", false );
 	$("body").addClass("edit-mode");
 	$('#bookTitle').attr("contenteditable", true);
 	$('#bookAuthor').attr("contenteditable", true);
