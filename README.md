@@ -1,6 +1,6 @@
-BookJockey readme
+# BookJockey readme
 
-About BookJockey
+## About BookJockey
 
 This is an early version of a tool that can be used to assemble information from sources around the internet to create a new learning experience.
 
@@ -10,21 +10,17 @@ BookJockey is built on top of brackets, an open source editor for HTMl, JavaScri
 
 
 
-How to start 
+## How to start 
 
 In order to build on top of what we have done, do the following steps:
 
-1. Download the build of brackets appropriate for your machine here: http://download.brackets.io
-
-2. Inside the application, locate the "Contents" folder. If there is a "www" folder there, delete its contents. Else, create a new folder and name it www.
-
-3. Clone this repository to the www folder inside the application.
-
-4. When you run the application, it should show the BookJockey starting page.
+  1. Download the build of brackets appropriate for your machine here: http://download.brackets.io
+  2. Inside the application, locate the "Contents" folder. If there is a "www" folder there, delete its contents. Else, create a new folder and name it www.
+  3. Clone this repository to the www folder inside the application.
+  4. When you run the application, it should show the BookJockey starting page.
 
 
-
-Technology used in the making of this application
+### Technology used in the making of this application
 
 Brackets:  https://github.com/adobe/brackets
 
