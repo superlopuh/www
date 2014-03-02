@@ -22,14 +22,9 @@ In order to build on top of what we have done, do the following steps:
 
 ### Technology used in the making of this application
 
-Brackets:  https://github.com/adobe/brackets
-
-PDF.js:    https://github.com/mozilla/pdf.js/
-
-Bootstrap: https://github.com/twbs/bootstrap
-
-jQuery:    https://github.com/jquery/jquery
-
-Showdown.js:    http://www.attacklab.net/
-
-Selection module of jQuery++: http://jquerypp.com/
+  * Brackets:  https://github.com/adobe/brackets
+  * PDF.js:    https://github.com/mozilla/pdf.js/
+  * Bootstrap: https://github.com/twbs/bootstrap
+  * jQuery:    https://github.com/jquery/jquery
+  * Showdown.js:    https://github.com/coreyti/showdown (original, outdated source at http://www.attacklab.net/)
+  * Selection module of jQuery++: http://jquerypp.com/
