@@ -30,6 +30,6 @@ Brackets:  https://github.com/adobe/brackets
 
 PDF.js:    https://github.com/mozilla/pdf.js/
 
-BootStrap: http://getbootstrap.com
+BootStrap: https://github.com/twbs/bootstrap
 
-jQuery:    http://jquery.com
+jQuery:    https://github.com/jquery/jquery
