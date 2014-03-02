@@ -26,6 +26,10 @@ Brackets:  https://github.com/adobe/brackets
 
 PDF.js:    https://github.com/mozilla/pdf.js/
 
-BootStrap: https://github.com/twbs/bootstrap
+Bootstrap: https://github.com/twbs/bootstrap
 
 jQuery:    https://github.com/jquery/jquery
+
+Showdown.js:    http://www.attacklab.net/
+
+Selection module of jQuery++: http://jquerypp.com/
