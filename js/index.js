@@ -19,6 +19,8 @@ $(window).load(function () {
 	}
 });
 
+var shareServer = "http://bookjockey.x14.eu";
+
 function openEditMode() {
 	$("#edit-button").html("View");
 	$('#textbook').sortable({items: '.wrapper'});
@@ -51,6 +53,10 @@ $(document).ready(function () {
 			loadTextbook(files[0]);
 		}
 	});
+	$('#share-button').click(shareTextbook);
+	$('#shareSuccessModalClose').click(function() {
+		$('#shareSuccessModal').modal('hide');
+	});
 });
 
 function openTextbook() {
@@ -62,6 +68,8 @@ function openTextbook() {
 
 function loadTextbook(filename) {
 	$('#edit-button').removeClass("disabled");
+	$('#share-button').removeClass("disabled");
+
 	$("#textbook").empty();
 	$.getJSON("file:///" + filename, function (textbook) {
 		brackets.currentTextbook = textbook;
@@ -89,8 +97,26 @@ function saveTextbook() {
 	});
 }
 
+function shareTextbook() {
+	modifyTitle($('#bookTitle').html());
+	modifyAuthor($('#bookAuthor').html());
+	$('#share-button').addClass("disabled").html("Uploading...");
+	$.post(shareServer+"/add", {
+		book: JSON.stringify(brackets.currentTextbook)
+	}).done(function(data) {
+		$('#share-button').removeClass("disabled").html("Share");
+		$('#shareURL').html(shareServer+"/"+data.filename);
+		$('#shareSuccessModal').modal();
+		console.log(data);
+	}).fail(function(x) {
+		$('#share-button').removeClass("disabled").html("Share");
+		alert("Failed to upload textbook to the server");
+	});
+}
+
 function renderNewTextbook() {
 	$('#edit-button').removeClass("disabled");
+	$('#share-button').removeClass("disabled");
 	brackets.textbookContainer = document.getElementById('textbook');
 	brackets.currentTextbook = createNewTextbook();
 	$("#textbook").empty();

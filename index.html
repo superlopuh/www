@@ -19,6 +19,7 @@
 				<button id="new-button" type="button" onclick="javascript:renderNewTextbook();" class="btn btn-primary">New</button>
 				<button id="open-button" type="button" onclick="javascript:openTextbook();" class="btn btn-primary">Open</button>
 				<button id="edit-button" type="button" class="btn btn-primary disabled">Edit</button>
+				<button id="share-button" type="button" class="btn btn-primary disabled">Share</button>
 				<button id="save-button" type="button" onclick="javascript:saveTextbook();" class="btn btn-success">Save</button>
 			</div>
 		</div>
@@ -28,6 +29,24 @@
 		<h2><a onclick="javascript:renderNewTextbook();">Create new textbook</a></h2>
 		<h2><a onclick="javascript:openTextbook();">Open an existing textbook</a></h2>
 	</div>
+
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true" id="shareSuccessModal">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Uploaded successfully</h4>
+				</div>
+				<div class="modal-body">
+					<p>Your book can be downloaded from the following URL</p>
+					<p id="shareURL"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success pull-right" id="shareSuccessModalClose">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- Nav tabs -->
 	<div id="add-wrapper">
 		<ul class="nav nav-tabs">
