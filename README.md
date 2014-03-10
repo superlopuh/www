@@ -4,7 +4,7 @@
 
 This is an early version of a tool that can be used to assemble information from sources around the internet to create a new learning experience.
 
-It was built for OpenBookPublishing as a group project in the University of Cambridge.
+It was built for Open Book Publishers as a group project in the University of Cambridge.
 
 BookJockey is built on top of brackets, an open source editor for HTMl, JavaScript and CSS. It uses PDF.js, an open source pdf viewer built in JavaScript.
 
